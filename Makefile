@@ -47,6 +47,9 @@ SRCS = \
 	src/minirt.c \
 	src/utils.c \
 	src/colors.c \
+	src/camera.c \
+	src/engine_events.c \
+	src/frame_control.c \
 	
 %.o: %.c $(HEADER)
 	@printf "[ $(_GREEN)$(_BOLD)>+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"

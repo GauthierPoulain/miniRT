@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 12:05:56 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 12:37:23 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define EPSILON			1e-4f
 # define LIGHT_MULT			2500
 
+# define KEY_EXIT			99
 # define KEY_CHANGECAM		99
 
 typedef	struct	s_vector
@@ -112,6 +113,9 @@ t_rgb			get_rgb(char **str);
 t_vector		parse_vector(char **str);
 
 t_engine		*init_engine(void);
+int				get_resolution(char **str);
+void			get_win_size(t_engine *engine, int save);
+void			init_window(t_engine *engine);
 
 void			check_scene(t_engine *engine);
 void			init_scene_parts(t_engine *engine);
@@ -138,5 +142,16 @@ double			sqnorm(t_vector vec);
 void			set_normalize(t_vector *vec);
 t_vector		get_normalize(t_vector vec);
 bool			vector_limit(t_vector vec, double min, double max);
+
+void			set_pixel_color(t_engine *engine, int x, int y, int color);
+t_rgb			get_pixel_color(t_engine *engine, int x, int y);
+void			init_frame(t_engine *engine);
+
+void			change_camera(t_engine *engine);
+
+int				key_event(int key, t_engine *engine);
+int				close_event(void);
+int				loop_event(t_engine *engine);
+void			engine_event(t_engine *engine);
 
 #endif
