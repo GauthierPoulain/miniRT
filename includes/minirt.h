@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 09:59:47 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 12:05:56 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define DEBUG				1
 
 # define EPSILON			1e-4f
+# define LIGHT_MULT			2500
 
 # define KEY_CHANGECAM		99
 
@@ -136,5 +137,6 @@ double			dot(t_vector s1, t_vector s2);
 double			sqnorm(t_vector vec);
 void			set_normalize(t_vector *vec);
 t_vector		get_normalize(t_vector vec);
+bool			vector_limit(t_vector vec, double min, double max);
 
 #endif

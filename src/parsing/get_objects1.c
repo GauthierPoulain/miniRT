@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:19:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 10:08:30 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 12:09:54 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	add_alight(t_engine *engine, char *file)
 	light.ratio = ft_atof(file);
 	file += ft_atof_len(file);
 	light.color = get_rgb(&file);
+	if (light.ratio < 0 || light.ratio > 1)
+		close_minirt("ambient light ratio is out of range [0.0, 1.0]");
 	engine->alight = light;
 }
 
@@ -35,6 +37,10 @@ void	add_camera(t_list **lst, char *file)
 	cam->dir = parse_vector(&file);
 	cam->fov = ft_atoi(file);
 	cam->id = ++id;
+	if (!vector_limit(cam->dir, -1, 1))
+		close_minirt("camera rotation is out of range [-1, 1]");
+	if (ft_check_limits(cam->fov, 0, 180))
+		close_minirt("cmaera fov is out of range [0, 180]");
 	new = ft_lstnew(cam);
 	if (!new)
 		close_minirt("error while parsing the scene");
@@ -68,9 +74,12 @@ void	add_light(t_list **lst, char *file)
 	if (!light)
 		close_minirt("error while parsing the scene");
 	light->pos = parse_vector(&file);
-	light->brightness = ft_atof(file) * 2500;
+	light->brightness = ft_atof(file);
 	file += ft_atof_len(file);
 	light->color = get_rgb(&file);
+	if (light->brightness < 0 || light->brightness > 1)
+		close_minirt("light brightness is out of range [0.0, 1.0]");
+	light->brightness *= LIGHT_MULT;
 	new = ft_lstnew(light);
 	if (!new)
 		close_minirt("error while parsing the scene");
@@ -87,7 +96,8 @@ void	add_plane(t_list **lst, char *file)
 		close_minirt("error while parsing the scene");
 	plane->origin = parse_vector(&file);
 	plane->normal = get_normalize(parse_vector(&file));
-	plane->normal.y--;
+	if (!vector_limit(plane->normal, 0, 1))
+		close_minirt("plane normal is out of range [0.0, 1.0]");
 	plane->color = get_rgb(&file);
 	new = ft_lstnew(plane);
 	if (!new)

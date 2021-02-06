@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:02 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 10:08:59 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 12:10:29 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,12 @@ int		main(int argc, char const **argv)
 	check_args(argc, argv);
 	engine = init_engine();
 	get_file(engine, argv[1]);
-	
 	if (argc == 3 && !ft_strcmp((char *)argv[2], "--save"))
 	{
 		engine->save = true;
-
 		close_minirt(NULL);
 	}
-
 	engine->save = true;
-	
 	close_minirt("unexpected error :/");
 	return (0);
 }

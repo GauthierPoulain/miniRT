@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:46:20 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 09:46:43 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 11:51:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ t_vector	get_normalize(t_vector vec)
 	res.y = vec.y / norm;
 	res.z = vec.z / norm;
 	return (res);
+}
+
+bool		vector_limit(t_vector vec, double min, double max)
+{
+	if (vec.x < min || vec.y < min || vec.z < min)
+		return (false);
+	else if (vec.x > max || vec.y > max || vec.z > max)
+		return (false);
+	else
+		return (true);
 }
