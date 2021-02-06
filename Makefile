@@ -23,7 +23,7 @@ _IWHITE=\033[47m
 NAME = miniRT
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3 -g
+CFLAGS = -Wall -Wextra -Werror -fno-builtin -g
 MAKE = make --no-print-directory
 RECOMPILE_MLX = 0
 
@@ -39,9 +39,14 @@ HEADER = \
 
 OBJS = $(SRCS:%.c=%.o)
 SRCS = \
-	src/engine_config.c \
+	src/vectors/vectors1.c \
+	src/vectors/vectors2.c \
+	src/init/engine_config.c \
+	src/parsing/parsing.c \
+	src/parsing/get_objects1.c \
 	src/minirt.c \
 	src/utils.c \
+	src/colors.c \
 	
 %.o: %.c $(HEADER)
 	@printf "[ $(_GREEN)$(_BOLD)>+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"
