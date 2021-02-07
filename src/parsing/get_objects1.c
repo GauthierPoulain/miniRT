@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:19:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 12:09:54 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 15:39:14 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	add_sphere(t_list **lst, char *file)
 	if (!sp)
 		close_minirt("error while parsing the scene");
 	sp->pos = parse_vector(&file);
-	sp->diameter = ft_atof(file);
+	sp->diameter = ft_atof(file) / 2;
 	file += ft_atof_len(file);
 	sp->color = get_rgb(&file);
 	new = ft_lstnew(sp);

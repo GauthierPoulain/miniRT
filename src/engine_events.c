@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 12:29:58 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 12:37:01 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 13:31:47 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			close_event(void)
 int			loop_event(t_engine *engine)
 {
 	if (engine->need_render)
-		printf("missing render function\n");
+		render(engine);
 	return (0);
 }
 

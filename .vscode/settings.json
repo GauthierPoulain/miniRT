@@ -6,9 +6,10 @@
 		"**/CVS": true,
 		"**/.DS_Store": true,
 		"**/*.a": true,
-		"**/*.o": true
+		"**/*.o": true,
 	},
 	"files.associations": {
-		"minirt.h": "c"
+		"minirt.h": "c",
+		"bonus.h": "c"
 	}
 }

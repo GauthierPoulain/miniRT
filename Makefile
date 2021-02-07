@@ -41,15 +41,23 @@ OBJS = $(SRCS:%.c=%.o)
 SRCS = \
 	src/vectors/vectors1.c \
 	src/vectors/vectors2.c \
+	src/vectors/vectors3.c \
 	src/init/engine_config.c \
 	src/parsing/parsing.c \
 	src/parsing/get_objects1.c \
+	src/render/render_multithreads.c \
+	src/raytrace/raytrace_sphere.c \
+	src/raytrace/some_calcs.c \
+	src/do_raytracing.c \
 	src/minirt.c \
 	src/utils.c \
+	src/utils2.c \
+	src/rays.c \
 	src/colors.c \
 	src/camera.c \
 	src/engine_events.c \
 	src/frame_control.c \
+	src/save.c \
 	
 %.o: %.c $(HEADER)
 	@printf "[ $(_GREEN)$(_BOLD)>+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"

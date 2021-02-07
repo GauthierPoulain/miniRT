@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 12:37:23 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 16:34:52 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # define EPSILON			1e-4f
 # define LIGHT_MULT			2500
+# define ALBEDO				0.3
 
 # define KEY_EXIT			99
 # define KEY_CHANGECAM		99
@@ -105,12 +106,37 @@ typedef struct	s_plane
 	t_rgb		color;
 }				t_plane;
 
+typedef struct	s_hit
+{
+	double		t;
+	t_vector	pos;
+	t_vector	normal;
+	t_rgb		color;
+}				t_hit;
+
+typedef struct	s_ray
+{
+	t_vector	origin;
+	t_vector	dir;
+	double		min;
+}				t_ray;
+
+typedef struct	s_thread_data
+{
+	t_engine	*engine;
+	int			from;
+	int			to;
+	int			id;
+	t_ray		ray;
+}				t_thread_data;
+
 int				main(int argc, char const **argv);
 
 int				is_id(char *str, char *id);
 void			close_minirt(char *reason);
 t_rgb			get_rgb(char **str);
 t_vector		parse_vector(char **str);
+double			to_rad(double angle);
 
 t_engine		*init_engine(void);
 int				get_resolution(char **str);
@@ -129,6 +155,10 @@ void			add_plane(t_list **lst, char *file);
 void			add_light(t_list **lst, char *file);
 
 t_rgb			creatergb(int r, int g, int b);
+t_rgb			mult_rgb_rgb(t_rgb rgb, t_rgb mult);
+t_rgb			mult_rgb_double(t_rgb rgb, double mult);
+t_rgb			add_rgb_rgb(t_rgb rgb, t_rgb add);
+void			min_rgb(t_rgb *color);
 
 t_vector		get_vector(double x, double y, double z);
 
@@ -153,5 +183,35 @@ int				key_event(int key, t_engine *engine);
 int				close_event(void);
 int				loop_event(t_engine *engine);
 void			engine_event(t_engine *engine);
+
+void			write_custom(int fd, unsigned int val);
+
+void			init_header(unsigned int *headers, t_engine *engine, int eb);
+void			write_header(int outfile, unsigned int *headers);
+void			imgcpy(int fd, int extrabites, t_engine *engine);
+void			get_save(t_engine *engine, char *filename);
+
+void			render(t_engine *engine);
+
+t_ray			new_ray(t_vector origin, t_vector dir);
+t_ray			init_ray(t_engine *engine, t_cam cam, int x, int y);
+t_vector		set_ray_direction(t_engine *engine, t_cam cam, int x, int y);
+
+void			do_raytracing(t_thread_data *thread, int x, int y);
+
+bool			secdegsolve(t_vector point, double *t1, double *t2);
+void			ray_spheres(t_ray ray, t_scene *scene, t_hit *hit, void **obj);
+
+t_vector		mult_mat(double mat[3][3], t_vector vect);
+t_vector		rot_vect(t_vector vect, double angle, char axe);
+
+double			ft_max_double(double a, double b);
+double			ft_min_double(double a, double b);
+
+#endif
+
+#ifndef M_PI
+
+# define M_PI 3.14159265358979323846
 
 #endif

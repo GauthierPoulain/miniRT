@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:02 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 13:16:40 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 13:35:03 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		main(int argc, char const **argv)
 	change_camera(engine);
 	if (engine->save)
 	{
+		get_save(engine, "save.bmp");
 		close_minirt(NULL);
 	}
 	init_window(engine);

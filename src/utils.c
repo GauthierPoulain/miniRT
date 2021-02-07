@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 08:07:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 09:42:58 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 15:59:27 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,9 @@ t_vector	parse_vector(char **str)
 	vec.z = ft_atof(*str);
 	*str += ft_atof_len(*str);
 	return (vec);
+}
+
+double		to_rad(double angle)
+{
+	return (angle * M_PI * 0.5);
 }

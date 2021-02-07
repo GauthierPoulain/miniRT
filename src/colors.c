@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:40:52 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 09:41:44 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/06 16:35:36 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,27 @@ t_rgb	creatergb(int r, int g, int b)
 	new.b = b;
 	new.g = g;
 	return (new);
+}
+
+t_rgb	mult_rgb_rgb(t_rgb rgb, t_rgb mult)
+{
+	return (creatergb(rgb.r * (mult.r / 255.), rgb.g *
+		(mult.g / 255.), rgb.b * (mult.b / 255.)));
+}
+
+t_rgb	mult_rgb_double(t_rgb rgb, double mult)
+{
+	return (creatergb(rgb.r * mult, rgb.g * mult, rgb.b * mult));
+}
+
+t_rgb	add_rgb_rgb(t_rgb rgb, t_rgb add)
+{
+	return (creatergb(rgb.r + add.r, rgb.g + add.g, rgb.b + add.b));
+}
+
+void		min_rgb(t_rgb *color)
+{
+	color->r = ft_math_min(color->r, 255);
+	color->g = ft_math_min(color->g, 255);
+	color->b = ft_math_min(color->b, 255);
 }
