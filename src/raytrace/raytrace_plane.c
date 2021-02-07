@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 01:37:38 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 06:10:25 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 09:37:06 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool		intersect_plane(t_ray ray, t_plane plane, t_hit *hit)
 	double	t;
 
 	denom = dot(plane.normal, ray.dir);
-	if (fabs(denom) > EPSILON)
+	if (fabs(denom) > 0)
 	{
 		t = dot(vectorminus(plane.origin, ray.origin), plane.normal)
 		/ denom;
@@ -28,6 +28,7 @@ bool		intersect_plane(t_ray ray, t_plane plane, t_hit *hit)
 			hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
 			hit->pos = vectoradd(hit->pos, vectormutliply(hit->normal,
 			EPSILON));
+			// t = t;
 			hit->t = t;
 			return (true);
 		}

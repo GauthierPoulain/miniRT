@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:48:13 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 16:01:43 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 08:48:54 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ bool		secdegsolve(t_vector point, double *t1, double *t2)
 	}
 	if (*t1 > *t2)
 		ft_swap(t1, t2);
-	return (1);
+	return (true);
 }

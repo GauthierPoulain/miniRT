@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:45:55 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 02:02:57 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 08:47:41 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ bool	intersect_sphere(const t_ray ray, const t_sphere sphere, t_hit *hit)
 		t1 = t2;
 	else if (t2 <= 0)
 		t2 = t1;
-	hit->t = t1;
-	if (t2 < t1)
-		hit->t = t2;
+	hit->t = ft_min_double(t1, t2);
 	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, t2));
 	hit->normal = get_normalize(vectorminus(hit->pos, sphere.pos));
 	hit->pos = vectoradd(hit->pos, vectormutliply(hit->normal, EPSILON));
