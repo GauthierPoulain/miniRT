@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:00:06 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 16:11:13 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 05:04:53 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ t_vector	rot_vect(t_vector vect, double angle, char axe)
 		{ sin(alpha), cos(alpha), 0 }, { 0, 0, 1 } }, vect));
 	else
 		return (get_vector(0, 0, 0));
+}
+
+double		distance(t_vector p1, t_vector p2)
+{
+	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2)
+		+ pow(p2.z - p1.z, 2)));
 }

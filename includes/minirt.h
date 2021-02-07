@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 16:34:52 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 06:06:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 # define DEBUG				1
 
 # define EPSILON			1e-4f
-# define LIGHT_MULT			2500
-# define ALBEDO				0.3
+# define ALBEDO				.3
 
 # define KEY_EXIT			99
 # define KEY_CHANGECAM		99
@@ -127,7 +126,6 @@ typedef struct	s_thread_data
 	int			from;
 	int			to;
 	int			id;
-	t_ray		ray;
 }				t_thread_data;
 
 int				main(int argc, char const **argv);
@@ -161,6 +159,7 @@ t_rgb			add_rgb_rgb(t_rgb rgb, t_rgb add);
 void			min_rgb(t_rgb *color);
 
 t_vector		get_vector(double x, double y, double z);
+double			distance(t_vector p1, t_vector p2);
 
 t_vector		vectoradd(t_vector s1, t_vector s2);
 t_vector		vectorminus(t_vector s1, t_vector s2);
@@ -200,13 +199,19 @@ t_vector		set_ray_direction(t_engine *engine, t_cam cam, int x, int y);
 void			do_raytracing(t_thread_data *thread, int x, int y);
 
 bool			secdegsolve(t_vector point, double *t1, double *t2);
-void			ray_spheres(t_ray ray, t_scene *scene, t_hit *hit, void **obj);
+void			raytrace_spheres(t_ray ray, t_scene *scene, t_hit *hit, void
+**obj);
 
 t_vector		mult_mat(double mat[3][3], t_vector vect);
 t_vector		rot_vect(t_vector vect, double angle, char axe);
 
 double			ft_max_double(double a, double b);
 double			ft_min_double(double a, double b);
+
+bool			intersect_plane(const t_ray ray, const t_plane plane, t_hit
+*hit);
+void			raytrace_planes(t_ray ray, t_scene *scene, t_hit *hit, void
+**obj);
 
 #endif
 

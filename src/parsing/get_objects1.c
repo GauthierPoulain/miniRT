@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:19:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 15:39:14 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 06:07:16 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	add_camera(t_list **lst, char *file)
 	cam->id = ++id;
 	if (!vector_limit(cam->dir, -1, 1))
 		close_minirt("camera rotation is out of range [-1, 1]");
+	set_normalize(&cam->dir);
 	if (ft_check_limits(cam->fov, 0, 180))
 		close_minirt("cmaera fov is out of range [0, 180]");
 	new = ft_lstnew(cam);
@@ -79,7 +80,7 @@ void	add_light(t_list **lst, char *file)
 	light->color = get_rgb(&file);
 	if (light->brightness < 0 || light->brightness > 1)
 		close_minirt("light brightness is out of range [0.0, 1.0]");
-	light->brightness *= LIGHT_MULT;
+	// light->brightness *= 255;
 	new = ft_lstnew(light);
 	if (!new)
 		close_minirt("error while parsing the scene");
@@ -95,9 +96,11 @@ void	add_plane(t_list **lst, char *file)
 	if (!plane)
 		close_minirt("error while parsing the scene");
 	plane->origin = parse_vector(&file);
-	plane->normal = get_normalize(parse_vector(&file));
-	if (!vector_limit(plane->normal, 0, 1))
-		close_minirt("plane normal is out of range [0.0, 1.0]");
+	plane->normal = parse_vector(&file);
+	if (!vector_limit(plane->normal, -1, 1))
+		close_minirt("plane normal is out of range [-1.0, 1.0]");
+	plane->normal.y--;
+	set_normalize(&plane->normal);
 	plane->color = get_rgb(&file);
 	new = ft_lstnew(plane);
 	if (!new)

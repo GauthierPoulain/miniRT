@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:45:55 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 15:35:08 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 02:02:57 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ bool	intersect_sphere(const t_ray ray, const t_sphere sphere, t_hit *hit)
 	return (true);
 }
 
-void	ray_spheres(t_ray ray, t_scene *scene, t_hit *hit, void **obj)
+void	raytrace_spheres(t_ray ray, t_scene *scene, t_hit *hit, void **obj)
 {
 	t_list		*item;
 	t_sphere	*sphere;
 
 	item = scene->spheres;
-	while (item->next)
+	while (item)
 	{
-		sphere = (t_sphere *)(item->content);
+		sphere = item->content;
 		if (intersect_sphere(ray, *sphere, hit))
 		{
 			*obj = sphere;

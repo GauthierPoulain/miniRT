@@ -47,6 +47,7 @@ SRCS = \
 	src/parsing/get_objects1.c \
 	src/render/render_multithreads.c \
 	src/raytrace/raytrace_sphere.c \
+	src/raytrace/raytrace_plane.c \
 	src/raytrace/some_calcs.c \
 	src/do_raytracing.c \
 	src/minirt.c \

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 13:41:20 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 15:34:47 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 02:16:36 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void		*render_thread(t_thread_data *thread)
 		x = -1;
 		while (++x < thread->engine->size_x)
 		{
-			// printf("x = %d, y = %d\n", x, y);
-			thread->ray = init_ray(thread->engine, *thread->engine->cam, x, y);
 			set_pixel_color(thread->engine, x, y, ft_rgbtohex(0, 0, 0));
 			do_raytracing(thread, x, y);
 		}
@@ -66,13 +64,11 @@ void		*render_scene_multithread(t_engine *engine, long nproc)
 void		render(t_engine *engine)
 {
 	render_scene_multithread(engine, sysconf(_SC_NPROCESSORS_ONLN));
-	printf("render\n");
 	if (engine->save)
 		return ;
 	mlx_clear_window(engine->mlx, engine->window);
 	mlx_put_image_to_window(engine->mlx, engine->window,
 		engine->frame->img, 0, 0);
 	mlx_do_sync(engine->mlx);
-	printf("render done\n");
-	engine->need_render = false;
+	// engine->need_render = false;
 }

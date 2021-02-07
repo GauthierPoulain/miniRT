@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:46:20 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 11:51:05 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 05:04:49 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,12 @@ double		sqnorm(t_vector vec)
 
 void		set_normalize(t_vector *vec)
 {
-	double		norm;
-
-	norm = sqrt(sqnorm(*vec));
-	vec->x /= norm;
-	vec->y /= norm;
-	vec->z /= norm;
+	*vec = vectordivide(*vec, distance(get_vector(0, 0, 0), *vec));
 }
 
 t_vector	get_normalize(t_vector vec)
 {
-	double		norm;
-	t_vector	res;
-
-	norm = sqrt(sqnorm(vec));
-	res.x = vec.x / norm;
-	res.y = vec.y / norm;
-	res.z = vec.z / norm;
-	return (res);
+	return (vectordivide(vec, distance(get_vector(0, 0, 0), vec)));
 }
 
 bool		vector_limit(t_vector vec, double min, double max)
