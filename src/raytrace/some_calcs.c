@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:48:13 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 08:48:54 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 12:07:52 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool		secdegsolve(t_vector point, double *t1, double *t2)
 
 	discr = point.y * point.y - 4 * point.x * point.z;
 	if (discr < 0)
-		return (0);
+		return (false);
 	else if (discr == 0)
 	{
 		*t1 = -0.5 * point.y / point.x;

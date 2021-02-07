@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:02:09 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 05:45:36 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 13:29:39 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ t_vector	set_ray_direction(t_engine *engine, t_cam cam, int x, int y)
 	// dir = rot_vect(dir, 1, 'x');
 	// dir = rot_vect(dir, 0, 'y');
 	// dir = rot_vect(dir, 1, 'z');
-	return (get_normalize(dir));
+	return (dir);
 }

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 09:35:40 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 14:55:50 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,18 @@ t_rgb		*manage_light(t_thread_data *thread, t_scene *scene, t_hit *hit)
 		hit_obstacle = closest_object(to_light, scene, &obstacle);
 		if (hit_obstacle->t > distance(hit->pos, light->pos))
 		{
+			// printf("dist = %f | calcdst = %f\n\n", hit_obstacle->t, distance(hit->pos, light->pos));
 			normal_dot_light = ft_max_double(dot(hit->normal,
 				to_light.dir), 0) / distance(hit->pos, light->pos);
 			color_l = mult_rgb_double(add_rgb_rgb(mult_rgb_double(light->color,
 			normal_dot_light), color_l), ALBEDO * light->brightness);
 			diffuse = add_rgb_rgb(diffuse, color_l);
 		}
-		// else
-		// 	hit->color = creatergb(255, 0, 0);
+		else
+		{
+			// hit->color = creatergb(255, 0, 0);
+			;
+		}
 		free(hit_obstacle);
 		lights = lights->next;
 	}
