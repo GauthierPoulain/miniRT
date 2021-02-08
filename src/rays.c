@@ -6,13 +6,13 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:02:09 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 18:06:23 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 15:07:38 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_ray		new_ray(t_vector origin, t_vector dir)
+t_ray	new_ray(t_vector origin, t_vector dir)
 {
 	t_ray	ray;
 
@@ -22,7 +22,7 @@ t_ray		new_ray(t_vector origin, t_vector dir)
 	return (ray);
 }
 
-t_ray		init_ray(t_engine *engine, t_cam cam, int x, int y)
+t_ray	init_ray(t_engine *engine, t_cam cam, int x, int y)
 {
 	t_vector	dir;
 
@@ -35,9 +35,9 @@ t_vector	set_ray_direction(t_engine *engine, t_cam cam, int x, int y)
 	t_vector	dir;
 
 	dir = get_vector(
-		(x - engine->size_x / 2) + cam.dir.x,
-		(engine->size_y / 2 - y) + cam.dir.y,
-		((engine->size_y / 2) / tan((cam.fov * M_PI / 180) / 2)) +
-		cam.dir.z);
+			(x - engine->size_x / 2) + cam.dir.x,
+			(engine->size_y / 2 - y) + cam.dir.y,
+			((engine->size_y / 2) / tan((cam.fov * PI / 180) / 2))
+			+ cam.dir.z);
 	return (dir);
 }

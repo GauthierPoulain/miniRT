@@ -10,6 +10,7 @@
 	},
 	"files.associations": {
 		"minirt.h": "c",
-		"bonus.h": "c"
+		"bonus.h": "c",
+		"stdbool.h": "c"
 	}
 }

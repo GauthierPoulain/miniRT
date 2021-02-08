@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:02 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 13:35:03 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 14:40:31 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ void	check_args(int argc, const char **argv)
 		close_minirt("second argument must be '--save'");
 }
 
-int		main(int argc, char const **argv)
+int	main(int argc, char const **argv)
 {
 	t_engine	*engine;
 
-	setbuf(stdout, NULL); // remove for "production"
 	check_args(argc, argv);
 	engine = init_engine();
 	get_file(engine, argv[1]);

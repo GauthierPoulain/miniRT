@@ -6,13 +6,13 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 10:00:02 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 15:03:06 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-void		check_scene(t_engine *engine)
+void	check_scene(t_engine *engine)
 {
 	int			alight;
 	int			resolution;
@@ -38,7 +38,7 @@ void		check_scene(t_engine *engine)
 		close_minirt("too much ambient light in scene");
 }
 
-void		init_scene_parts(t_engine *engine)
+void	init_scene_parts(t_engine *engine)
 {
 	engine->scene.cams = NULL;
 	engine->scene.lights = NULL;
@@ -46,7 +46,7 @@ void		init_scene_parts(t_engine *engine)
 	engine->scene.spheres = NULL;
 }
 
-void		parse_scene(char **file, t_engine *engine)
+void	parse_scene(char **file, t_engine *engine)
 {
 	int		i;
 
@@ -68,7 +68,7 @@ void		parse_scene(char **file, t_engine *engine)
 	}
 }
 
-void		get_file(t_engine *engine, const char *path)
+void	get_file(t_engine *engine, const char *path)
 {
 	int		fd;
 

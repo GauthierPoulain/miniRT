@@ -6,15 +6,15 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 12:25:50 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 12:38:36 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 15:07:52 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void		change_camera(t_engine *engine)
+void	change_camera(t_engine *engine)
 {
-	t_list *item;
+	t_list	*item;
 
 	item = engine->scene.cams;
 	while (item)

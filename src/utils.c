@@ -6,13 +6,13 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 08:07:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/06 15:59:27 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 14:47:10 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int			is_id(char *str, char *id)
+int	is_id(char *str, char *id)
 {
 	size_t	tmp;
 
@@ -20,7 +20,7 @@ int			is_id(char *str, char *id)
 	return (!ft_strncmp(str, id, tmp) && (!str[tmp] || ft_isspace(str[tmp])));
 }
 
-void		close_minirt(char *reason)
+void	close_minirt(char *reason)
 {
 	if (reason)
 	{
@@ -33,7 +33,7 @@ void		close_minirt(char *reason)
 		exit(EXIT_SUCCESS);
 }
 
-t_rgb		get_rgb(char **str)
+t_rgb	get_rgb(char **str)
 {
 	t_rgb	color;
 
@@ -49,8 +49,8 @@ t_rgb		get_rgb(char **str)
 	*str += 1;
 	color.b = ft_atoi(*str);
 	*str += ft_atoi_len(*str);
-	if (ft_check_limits(color.r, 0, 255) || ft_check_limits(color.g, 0, 255)
-		|| ft_check_limits(color.b, 0, 255))
+	if (!ft_isinrange(color.r, 0, 255) || !ft_isinrange(color.g, 0, 255)
+		|| !ft_isinrange(color.b, 0, 255))
 		close_minirt("wrong rgb format");
 	return (creatergb(color.r, color.g, color.b));
 }
@@ -74,7 +74,7 @@ t_vector	parse_vector(char **str)
 	return (vec);
 }
 
-double		to_rad(double angle)
+double	to_rad(double angle)
 {
-	return (angle * M_PI * 0.5);
+	return (angle * PI * 0.5);
 }

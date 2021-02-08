@@ -6,13 +6,13 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 01:37:38 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 16:45:40 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 14:55:41 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-bool		intersect_plane(t_ray ray, t_plane plane, t_hit *hit)
+bool	intersect_plane(t_ray ray, t_plane plane, t_hit *hit)
 {
 	double		denom;
 	double		t;

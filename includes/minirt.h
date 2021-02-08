@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 17:05:46 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 14:53:11 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,23 @@
 
 # define DEBUG				1
 
-# define EPSILON			1e-4f
+# define EPSILON			0.001
 # define ALBEDO				.3
 # define LIGHT_MULT			10
 
 # define KEY_EXIT			99
 # define KEY_CHANGECAM		99
 
-typedef	struct	s_vector
+# define PI 3.14159265358979323846
+
+typedef struct s_vector
 {
 	double		x;
 	double		y;
 	double		z;
 }				t_vector;
 
-typedef struct	s_cam
+typedef struct s_cam
 {
 	int			id;
 	t_vector	pos;
@@ -47,7 +49,7 @@ typedef struct	s_cam
 	int			fov;
 }				t_cam;
 
-typedef struct	s_frame
+typedef struct s_frame
 {
 	void		*addr;
 	void		*img;
@@ -56,7 +58,7 @@ typedef struct	s_frame
 	int			endian;
 }				t_frame;
 
-typedef struct	s_scene
+typedef struct s_scene
 {
 	t_list		*cams;
 	t_list		*lights;
@@ -64,13 +66,13 @@ typedef struct	s_scene
 	t_list		*planes;
 }				t_scene;
 
-typedef struct	s_alight
+typedef struct s_alight
 {
 	double		ratio;
 	t_rgb		color;
 }				t_alight;
 
-typedef struct	s_engine
+typedef struct s_engine
 {
 	void		*mlx;
 	void		*window;
@@ -85,28 +87,28 @@ typedef struct	s_engine
 	t_cam		*cam;
 }				t_engine;
 
-typedef struct	s_light
+typedef struct s_light
 {
 	t_vector	pos;
 	double		brightness;
 	t_rgb		color;
 }				t_light;
 
-typedef struct	s_sphere
+typedef struct s_sphere
 {
 	t_vector	pos;
 	double		diameter;
 	t_rgb		color;
 }				t_sphere;
 
-typedef struct	s_plane
+typedef struct s_plane
 {
 	t_vector	origin;
 	t_vector	normal;
 	t_rgb		color;
 }				t_plane;
 
-typedef struct	s_hit
+typedef struct s_hit
 {
 	double		t;
 	t_vector	pos;
@@ -114,14 +116,14 @@ typedef struct	s_hit
 	t_rgb		color;
 }				t_hit;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	t_vector	origin;
 	t_vector	dir;
 	double		min;
 }				t_ray;
 
-typedef struct	s_thread_data
+typedef struct s_thread_data
 {
 	t_engine	*engine;
 	int			from;
@@ -130,96 +132,68 @@ typedef struct	s_thread_data
 }				t_thread_data;
 
 int				main(int argc, char const **argv);
-
 int				is_id(char *str, char *id);
 void			close_minirt(char *reason);
 t_rgb			get_rgb(char **str);
 t_vector		parse_vector(char **str);
 double			to_rad(double angle);
-
 t_engine		*init_engine(void);
 int				get_resolution(char **str);
 void			get_win_size(t_engine *engine, int save);
 void			init_window(t_engine *engine);
-
 void			check_scene(t_engine *engine);
 void			init_scene_parts(t_engine *engine);
 void			parse_scene(char **file, t_engine *engine);
 void			get_file(t_engine *engine, const char *path);
-
 void			add_alight(t_engine *engine, char *file);
 void			add_sphere(t_list **lst, char *file);
 void			add_camera(t_list **lst, char *file);
 void			add_plane(t_list **lst, char *file);
 void			add_light(t_list **lst, char *file);
-
 t_rgb			creatergb(int r, int g, int b);
 t_rgb			mult_rgb_rgb(t_rgb rgb, t_rgb mult);
 t_rgb			mult_rgb_double(t_rgb rgb, double mult);
 t_rgb			add_rgb_rgb(t_rgb rgb, t_rgb add);
 void			min_rgb(t_rgb *color);
-
 t_vector		get_vector(double x, double y, double z);
 double			distance(t_vector p1, t_vector p2);
-
 t_vector		vectoradd(t_vector s1, t_vector s2);
 t_vector		vectorminus(t_vector s1, t_vector s2);
 t_vector		vectormutliply(t_vector s1, double value);
 t_vector		vectordivide(t_vector s1, double value);
-
 double			dot(t_vector s1, t_vector s2);
 double			sqnorm(t_vector vec);
 void			set_normalize(t_vector *vec);
 t_vector		get_normalize(t_vector vec);
 bool			vector_limit(t_vector vec, double min, double max);
-
 void			set_pixel_color(t_engine *engine, int x, int y, int color);
 t_rgb			get_pixel_color(t_engine *engine, int x, int y);
 void			init_frame(t_engine *engine);
-
 void			change_camera(t_engine *engine);
-
 int				key_event(int key, t_engine *engine);
 int				close_event(void);
 int				loop_event(t_engine *engine);
 void			engine_event(t_engine *engine);
-
 void			write_custom(int fd, unsigned int val);
-
 void			init_header(unsigned int *headers, t_engine *engine, int eb);
 void			write_header(int outfile, unsigned int *headers);
 void			imgcpy(int fd, int extrabites, t_engine *engine);
 void			get_save(t_engine *engine, char *filename);
-
 void			render(t_engine *engine);
-
 t_ray			new_ray(t_vector origin, t_vector dir);
 t_ray			init_ray(t_engine *engine, t_cam cam, int x, int y);
 t_vector		set_ray_direction(t_engine *engine, t_cam cam, int x, int y);
-
 void			do_raytracing(t_thread_data *thread, int x, int y);
-
 bool			secdegsolve(t_vector point, double *t1, double *t2);
 void			raytrace_spheres(t_ray ray, t_scene *scene, t_hit *hit, void
-**obj);
-
+					**obj);
 t_vector		mult_mat(double mat[3][3], t_vector vect);
-t_vector		rot_vect(t_vector vect, double angle, char axe);
-
 double			ft_max_double(double a, double b);
 double			ft_min_double(double a, double b);
-
 bool			intersect_plane(const t_ray ray, const t_plane plane, t_hit
-*hit);
+					*hit);
 void			raytrace_planes(t_ray ray, t_scene *scene, t_hit *hit, void
-**obj);
-
+					**obj);
 t_vector		normaltodeg(t_vector vec);
-
-#endif
-
-#ifndef M_PI
-
-# define M_PI 3.14159265358979323846
 
 #endif

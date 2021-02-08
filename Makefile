@@ -61,7 +61,7 @@ SRCS = \
 	src/save.c \
 	
 %.o: %.c $(HEADER)
-	@printf "[ $(_GREEN)$(_BOLD)>+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"
+	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: ${NAME}
@@ -75,13 +75,13 @@ endif
 $(NAME) : $(OBJS)
 	@$(MAKE) -C ./libft
 	@$(MAKE) mlx
-	@printf "[ $(_GREEN)$(_BOLD)>+$(_END) ][ building ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
+	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)+$(_END) ][ building ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a $(MLX)
-	@printf "[ $(_GREEN)$(_BOLD):)$(_END) ][ done ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
+	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_BLUE)$(_BOLD)!$(_END) ][ done ]\n"
 
 clean:
 	@$(MAKE) clean -C ./libft
-	@printf "[ $(_RED)$(_BOLD)--$(_END) ][ removing ] $(_BLUE)$(_BOLD)printf objs $(_END)\n"
+	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_RED)$(_BOLD)-$(_END) ][ removing ] $(_BLUE)$(_BOLD)minirt objs $(_END)\n"
 	@$(RM) $(OBJS)
 
 fclean: clean
@@ -90,7 +90,7 @@ ifeq ($(RECOMPILE_MLX), 1)
 endif
 	@$(MAKE) fclean -C ./libft
 	@$(RM) libmlx.dylib
-	@printf "[ $(_RED)$(_BOLD)--$(_END) ][ removing ] $(_BLUE)$(_BOLD)$(NAME) $(_END)\n"
+	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_RED)$(_BOLD)-$(_END) ][ removing ] $(_BLUE)$(_BOLD)$(NAME) $(_END)\n"
 	@$(RM) $(NAME)	
 	@find . -name "*.bmp" -delete -print
 	@find . -name "*.out" -delete -print
@@ -106,8 +106,7 @@ soft:
 	@printf "[ $(_GREEN)$(_BOLD):)$(_END) ][ done ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
 
 norm:
-	@$(MAKE) norm -C ./libft
-	norminette src/*.[ch] includes/*.[ch]
+	norminette libft src includes
 
 leaks: soft
 ifeq ($(shell uname -s),Linux)

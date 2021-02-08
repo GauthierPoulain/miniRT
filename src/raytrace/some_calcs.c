@@ -6,13 +6,13 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:48:13 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 12:07:52 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 14:54:36 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-bool		secdegsolve(t_vector point, double *t1, double *t2)
+bool	secdegsolve(t_vector point, double *t1, double *t2)
 {
 	double	discr;
 	double	root;

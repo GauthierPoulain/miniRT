@@ -6,13 +6,13 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 13:22:27 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 06:34:59 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 15:05:09 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void		write_custom(int fd, unsigned int val)
+void	write_custom(int fd, unsigned int val)
 {
 	char	tmp;
 
@@ -20,9 +20,9 @@ void		write_custom(int fd, unsigned int val)
 	write(fd, &tmp, 1);
 }
 
-void		init_header(unsigned int *headers, t_engine *engine, int eb)
+void	init_header(unsigned int *headers, t_engine *engine, int eb)
 {
-	int		paddedsize;
+	int	paddedsize;
 
 	paddedsize = ((engine->size_x * 3) + eb) * engine->size_y;
 	headers[0] = paddedsize + 54;
@@ -39,9 +39,9 @@ void		init_header(unsigned int *headers, t_engine *engine, int eb)
 	headers[12] = 0;
 }
 
-void		write_header(int outfile, unsigned int *headers)
+void	write_header(int outfile, unsigned int *headers)
 {
-	int		i;
+	int	i;
 
 	write(outfile, "BM", 2);
 	i = -1;
@@ -50,7 +50,7 @@ void		write_header(int outfile, unsigned int *headers)
 		write_custom(outfile, headers[i] & 0x000000FF);
 		write_custom(outfile, (headers[i] & 0x0000FF00) >> 8);
 		write_custom(outfile, (headers[i] & 0x00FF0000) >> 16);
-		write_custom(outfile, (headers[i] & (unsigned int)0xFF000000) >> 24);
+		write_custom(outfile, (headers[i] & (unsigned int) 0xFF000000) >> 24);
 	}
 	write_custom(outfile, 1);
 	write_custom(outfile, 0);
@@ -62,11 +62,11 @@ void		write_header(int outfile, unsigned int *headers)
 		write_custom(outfile, headers[i] & 0x000000FF);
 		write_custom(outfile, (headers[i] & 0x0000FF00) >> 8);
 		write_custom(outfile, (headers[i] & 0x00FF0000) >> 16);
-		write_custom(outfile, (headers[i] & (unsigned int)0xFF000000) >> 24);
+		write_custom(outfile, (headers[i] & (unsigned int) 0xFF000000) >> 24);
 	}
 }
 
-void		imgcpy(int fd, int extrabites, t_engine *engine)
+void	imgcpy(int fd, int extrabites, t_engine *engine)
 {
 	int		x;
 	int		y;
@@ -77,7 +77,8 @@ void		imgcpy(int fd, int extrabites, t_engine *engine)
 	y = 0;
 	while (y < engine->size_y)
 	{
-		buffer = ft_calloc((3 * engine->size_x) + extrabites, sizeof(char));
+		ft_calloc((3 * engine->size_x) + extrabites, sizeof(char),
+				(void **)&buffer);
 		blen = 0;
 		x = 0;
 		while (x < engine->size_x)
@@ -94,7 +95,7 @@ void		imgcpy(int fd, int extrabites, t_engine *engine)
 	}
 }
 
-void		get_save(t_engine *engine, char *filename)
+void	get_save(t_engine *engine, char *filename)
 {
 	unsigned int	headers[13];
 	int				outfile;

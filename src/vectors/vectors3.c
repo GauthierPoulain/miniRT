@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:00:06 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 05:04:53 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 14:54:02 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,8 @@ t_vector	mult_mat(double mat[3][3], t_vector vect)
 	return (res);
 }
 
-t_vector	rot_vect(t_vector vect, double angle, char axe)
-{
-	double	alpha;
-
-	alpha = to_rad(angle * 0.5);
-	if (axe == 'x')
-		return (mult_mat((double[3][3])
-	{ {1, 0, 0}, { 0, cos(alpha),
--sin(alpha) }, { 0, sin(alpha), -cos(alpha) }
-	}, vect));
-	else if (axe == 'y')
-		return (mult_mat((double[3][3])
-		{ {cos(alpha), 0, sin(alpha)}, { 0, 1, 0 },
-		{ -sin(alpha), 0, cos(alpha) } }, vect));
-	else if (axe == 'z')
-		return (mult_mat((double[3][3])
-		{ {cos(alpha), sin(alpha), 0},
-		{ sin(alpha), cos(alpha), 0 }, { 0, 0, 1 } }, vect));
-	else
-		return (get_vector(0, 0, 0));
-}
-
-double		distance(t_vector p1, t_vector p2)
+double	distance(t_vector p1, t_vector p2)
 {
 	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2)
-		+ pow(p2.z - p1.z, 2)));
+			+ pow(p2.z - p1.z, 2)));
 }
