@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/07 13:39:02 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/07 17:05:46 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # define EPSILON			1e-4f
 # define ALBEDO				.3
+# define LIGHT_MULT			10
 
 # define KEY_EXIT			99
 # define KEY_CHANGECAM		99
@@ -212,6 +213,8 @@ bool			intersect_plane(const t_ray ray, const t_plane plane, t_hit
 *hit);
 void			raytrace_planes(t_ray ray, t_scene *scene, t_hit *hit, void
 **obj);
+
+t_vector		normaltodeg(t_vector vec);
 
 #endif
 
