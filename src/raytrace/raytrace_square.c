@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raytrace_plane.c                                   :+:      :+:    :+:   */
+/*   raytrace_square.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/07 01:37:38 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/09 11:02:54 by gapoulai         ###   ########lyon.fr   */
+/*   Created: 2021/02/09 11:18:33 by gapoulai          #+#    #+#             */
+/*   Updated: 2021/02/09 15:11:06 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-bool	intersect_plane(t_ray ray, t_plane plane, t_hit *hit)
+bool	intersect_square(t_ray ray, t_square square, t_hit *hit)
 {
 	double		denom;
 	double		t;
 
-	denom = dot(plane.normal, ray.dir);
+	denom = dot(square.normal, ray.dir);
 	if (fabs(denom) > EPSILON)
 	{
-		t = dot(vectorminus(plane.origin, ray.origin), plane.normal) / denom;
+		t = dot(vectorminus(square.origin, ray.origin), square.normal) / denom;
 		if (t < EPSILON || t > hit->t)
 			return (false);
-		hit->normal = plane.normal;
+		if (distance(square.origin, vectoradd(ray.origin,
+					vectormutliply(ray.dir, t))) > square.size)
+			return (false);
+		hit->normal = square.normal;
 		hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
 		hit->t = distance(ray.origin, hit->pos);
 		return (true);
@@ -31,19 +34,19 @@ bool	intersect_plane(t_ray ray, t_plane plane, t_hit *hit)
 	return (false);
 }
 
-void	raytrace_planes(t_ray ray, t_scene *scene, t_hit *hit, void **obj)
+void	raytrace_square(t_ray ray, t_scene *scene, t_hit *hit, void **obj)
 {
-	t_list	*item;
-	t_plane	*plane;
+	t_list		*item;
+	t_square	*square;
 
-	item = scene->planes;
+	item = scene->squares;
 	while (item)
 	{
-		plane = item->content;
-		if (intersect_plane(ray, *plane, hit))
+		square = item->content;
+		if (intersect_square(ray, *square, hit))
 		{
-			*obj = plane;
-			hit->color = plane->color;
+			*obj = square;
+			hit->color = square->color;
 		}
 		item = item->next;
 	}

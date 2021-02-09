@@ -45,9 +45,12 @@ SRCS = \
 	src/init/engine_config.c \
 	src/parsing/parsing.c \
 	src/parsing/get_objects1.c \
+	src/parsing/get_objects2.c \
 	src/render/render_multithreads.c \
 	src/raytrace/raytrace_sphere.c \
 	src/raytrace/raytrace_plane.c \
+	src/raytrace/raytrace_square.c \
+	src/raytrace/raytrace_disk.c \
 	src/raytrace/some_calcs.c \
 	src/do_raytracing.c \
 	src/minirt.c \
@@ -55,6 +58,7 @@ SRCS = \
 	src/utils2.c \
 	src/rays.c \
 	src/colors.c \
+	src/colors2.c \
 	src/camera.c \
 	src/engine_events.c \
 	src/frame_control.c \
@@ -92,8 +96,6 @@ endif
 	@$(RM) libmlx.dylib
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_RED)$(_BOLD)-$(_END) ][ removing ] $(_BLUE)$(_BOLD)$(NAME) $(_END)\n"
 	@$(RM) $(NAME)	
-	@find . -name "*.bmp" -delete -print
-	@find . -name "*.out" -delete -print
 
 re: fclean
 	@$(MAKE) all
@@ -106,7 +108,7 @@ soft:
 	@printf "[ $(_GREEN)$(_BOLD):)$(_END) ][ done ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
 
 norm:
-	norminette libft src includes
+	@norminettev2 libft src includes
 
 leaks: soft
 ifeq ($(shell uname -s),Linux)
@@ -120,7 +122,7 @@ test: soft
 	./$(NAME) ./scenes/test.rt
 
 save: soft
-	./$(NAME) ./scenes/test.rt --save
+	./$(NAME) ./scenes/test_lights.rt --save
 	# open ./save.bmp
 
 .PHONY: all mlx clean fclean re soft norm leaks test save

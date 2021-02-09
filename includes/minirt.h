@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 14:53:11 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/09 15:10:23 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define DEBUG				1
 
 # define EPSILON			0.001
-# define ALBEDO				.3
+# define ALBEDO				.4
 # define LIGHT_MULT			10
 
 # define KEY_EXIT			99
@@ -64,6 +64,8 @@ typedef struct s_scene
 	t_list		*lights;
 	t_list		*spheres;
 	t_list		*planes;
+	t_list		*squares;
+	t_list		*disks;
 }				t_scene;
 
 typedef struct s_alight
@@ -108,6 +110,22 @@ typedef struct s_plane
 	t_rgb		color;
 }				t_plane;
 
+typedef struct s_square
+{
+	t_vector	origin;
+	t_vector	normal;
+	double		size;
+	t_rgb		color;
+}				t_square;
+
+typedef struct s_disk
+{
+	t_vector	origin;
+	t_vector	normal;
+	double		size;
+	t_rgb		color;
+}				t_disk;
+
 typedef struct s_hit
 {
 	double		t;
@@ -130,6 +148,18 @@ typedef struct s_thread_data
 	int			to;
 	int			id;
 }				t_thread_data;
+
+typedef struct s_light_managment
+{
+	t_list	*lights;
+	t_light	*light;
+	t_ray	to_light;
+	void	*obstacle;
+	t_hit	*hit_obstacle;
+	t_rgb	diffuse;
+	t_rgb	color_l;
+	double	normal_dot_light;
+}				t_light_managment;
 
 int				main(int argc, char const **argv);
 int				is_id(char *str, char *id);
@@ -195,5 +225,12 @@ bool			intersect_plane(const t_ray ray, const t_plane plane, t_hit
 void			raytrace_planes(t_ray ray, t_scene *scene, t_hit *hit, void
 					**obj);
 t_vector		normaltodeg(t_vector vec);
+void			add_disk(t_list **lst, char *file);
+void			add_square(t_list **lst, char *file);
+void			raytrace_square(t_ray ray, t_scene *scene, t_hit *hit, void
+					**obj);
+void			raytrace_disk(t_ray ray, t_scene *scene, t_hit *hit, void
+					**obj);
+t_rgb			moy_rgb_rgb(t_rgb rgb1, t_rgb rgb2);
 
 #endif

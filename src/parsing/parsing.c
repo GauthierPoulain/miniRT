@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 15:03:06 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/09 11:20:11 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	init_scene_parts(t_engine *engine)
 	engine->scene.lights = NULL;
 	engine->scene.planes = NULL;
 	engine->scene.spheres = NULL;
+	engine->scene.squares = NULL;
+	engine->scene.disks = NULL;
 }
 
 void	parse_scene(char **file, t_engine *engine)
@@ -64,6 +66,10 @@ void	parse_scene(char **file, t_engine *engine)
 			add_light(&engine->scene.lights, file[i] + 1);
 		else if (is_id(file[i], "pl"))
 			add_plane(&engine->scene.planes, file[i] + 2);
+		else if (is_id(file[i], "sq"))
+			add_square(&engine->scene.squares, file[i] + 2);
+		else if (is_id(file[i], "ds"))
+			add_disk(&engine->scene.disks, file[i] + 2);
 		i++;
 	}
 }
@@ -72,7 +78,7 @@ void	get_file(t_engine *engine, const char *path)
 {
 	int		fd;
 
-	if (open((char *)path, __O_DIRECTORY) != -1)
+	if (open((char *)path, O_DIRECTORY) != -1)
 		close_minirt("scene must be a file");
 	fd = open((char *)path, O_RDONLY);
 	if (fd == -1)
