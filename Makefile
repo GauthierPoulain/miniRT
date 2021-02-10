@@ -122,7 +122,7 @@ test: soft
 	./$(NAME) ./scenes/test.rt
 
 save: soft
-	./$(NAME) ./scenes/test.rt --save
+	./$(NAME) ./scenes/test_lights.rt --save
 	# open ./save.bmp
 
 .PHONY: all mlx clean fclean re soft norm leaks test save

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/09 09:20:37 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 12:31:06 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_rgb	*manage_light(t_thread_data *thread, t_scene *scene, t_hit *hit)
 	data.lights = scene->lights;
 	while (data.lights)
 		process_light(&data, hit, scene);
+		(void)thread;
 	hit->color = mult_rgb_rgb(add_rgb_rgb(mult_rgb_double(
 					thread->engine->alight.color, thread->engine->alight.ratio),
 				data.diffuse), hit->color);
@@ -78,12 +79,8 @@ void	do_raytracing(t_thread_data *thread, int x, int y)
 		if (dot(hit->normal, ray.dir) >= 0)
 			hit->normal = vectormutliply(hit->normal, -1);
 		manage_light(thread, &thread->engine->scene, hit);
+		set_pixel_color(thread->engine, x, y, ft_rgbtohex(
+			hit->color.r, hit->color.g, hit->color.b));
 	}
 	free(hit);
-	if (hit->color.r == 255 && hit->color.g == 255 && hit->color.b == 255)
-	{
-		printf("x = %d, y = %d\n", x, y);
-	}
-	set_pixel_color(thread->engine, x, y, ft_rgbtohex(
-		hit->color.r, hit->color.g, hit->color.b));
 }
