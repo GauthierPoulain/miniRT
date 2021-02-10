@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:16:26 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/09 15:11:57 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 16:13:39 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	add_square(t_list **lst, char *file)
 	if (!vector_limit(square->normal, -1, 1))
 		close_minirt("square orientation is out of range [-1.0, 1.0]");
 	square->normal.x = to_rad(90 * square->normal.x);
-	square->normal.y = to_rad(90 * square->normal.y + 1);
+	square->normal.y = to_rad(90 * square->normal.y);
 	square->normal.z = to_rad(90 * square->normal.z);
 	set_normalize(&square->normal);
 	square->size = ft_atof(file);
