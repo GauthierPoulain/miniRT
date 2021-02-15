@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/10 11:06:26 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 12:33:56 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,6 @@ void			do_raytracing(t_thread_data *thread, int x, int y);
 bool			secdegsolve(t_vector point, double *t1, double *t2);
 void			raytrace_spheres(t_ray ray, t_scene *scene, t_hit *hit, void
 					**obj);
-t_vector		mult_mat(double mat[3][3], t_vector vect);
 double			ft_max_double(double a, double b);
 double			ft_min_double(double a, double b);
 bool			intersect_plane(const t_ray ray, const t_plane plane, t_hit
@@ -232,5 +231,6 @@ void			raytrace_square(t_ray ray, t_scene *scene, t_hit *hit, void
 void			raytrace_disk(t_ray ray, t_scene *scene, t_hit *hit, void
 					**obj);
 t_rgb			moy_rgb_rgb(t_rgb rgb1, t_rgb rgb2);
+t_vector		vectorcross(t_vector v1, t_vector v2);
 
 #endif
