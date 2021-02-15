@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/09 11:20:11 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 08:51:40 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_scene_parts(t_engine *engine)
 	engine->scene.spheres = NULL;
 	engine->scene.squares = NULL;
 	engine->scene.disks = NULL;
+	engine->scene.triangles = NULL;
 }
 
 void	parse_scene(char **file, t_engine *engine)
@@ -70,6 +71,8 @@ void	parse_scene(char **file, t_engine *engine)
 			add_square(&engine->scene.squares, file[i] + 2);
 		else if (is_id(file[i], "ds"))
 			add_disk(&engine->scene.disks, file[i] + 2);
+		else if (is_id(file[i], "tr"))
+			add_triangle(&engine->scene.triangles, file[i] + 2);
 		i++;
 	}
 }

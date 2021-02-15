@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:16:26 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/10 16:13:39 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 08:50:47 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,25 @@ void	add_disk(t_list **lst, char *file)
 	file += ft_atof_len(file);
 	disk->color = get_rgb(&file);
 	new = ft_lstnew(disk);
+	if (!new)
+		close_minirt("error while parsing the scene");
+	ft_lstadd_back(lst, new);
+}
+
+void	add_triangle(t_list **lst, char *file)
+{
+	t_triangle	*triangle;
+	t_list		*new;
+
+	triangle = malloc(sizeof(t_triangle));
+	if (!triangle)
+		close_minirt("error while parsing the scene");
+	triangle->p1 = parse_vector(&file);
+	triangle->p2 = parse_vector(&file);
+	triangle->p3 = parse_vector(&file);
+	triangle->normal = get_triangle_normal(triangle);
+	triangle->color = get_rgb(&file);
+	new = ft_lstnew(triangle);
 	if (!new)
 		close_minirt("error while parsing the scene");
 	ft_lstadd_back(lst, new);

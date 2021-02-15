@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/15 12:33:56 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 08:50:54 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_scene
 	t_list		*planes;
 	t_list		*squares;
 	t_list		*disks;
+	t_list		*triangles;
 }				t_scene;
 
 typedef struct s_alight
@@ -117,6 +118,15 @@ typedef struct s_square
 	double		size;
 	t_rgb		color;
 }				t_square;
+
+typedef struct s_triangle
+{
+	t_vector	p1;
+	t_vector	p2;
+	t_vector	p3;
+	t_vector	normal;
+	t_rgb		color;
+}				t_triangle;
 
 typedef struct s_disk
 {
@@ -232,5 +242,9 @@ void			raytrace_disk(t_ray ray, t_scene *scene, t_hit *hit, void
 					**obj);
 t_rgb			moy_rgb_rgb(t_rgb rgb1, t_rgb rgb2);
 t_vector		vectorcross(t_vector v1, t_vector v2);
+void			raytrace_triangle(t_ray ray, t_scene *scene, t_hit *hit, void
+					**obj);
+t_vector		get_triangle_normal(t_triangle *triangle);
+void			add_triangle(t_list **lst, char *file);
 
 #endif

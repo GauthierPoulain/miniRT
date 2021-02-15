@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:23:47 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 14:40:10 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 09:39:31 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,14 @@ t_vector	normaltodeg(t_vector vec)
 	vec.y = to_rad(90 * vec.y);
 	vec.z = to_rad(90 * vec.z);
 	return (vec);
+}
+
+t_vector	get_triangle_normal(t_triangle *triangle)
+{
+	t_vector	a;
+	t_vector	b;
+
+	a = vectorminus(triangle->p2, triangle->p1);
+	b = vectorminus(triangle->p3, triangle->p1);
+	return (vectorcross(a, b));
 }
