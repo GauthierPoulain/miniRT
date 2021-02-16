@@ -8,3 +8,5 @@ miniRT
 .DS_Store
 *.bmp
 *.dSYM
+**/node_modules
+**/package-lock.json
