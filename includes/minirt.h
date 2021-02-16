@@ -100,7 +100,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_vector	pos;
-	double		diameter;
+	double		radius;
 	t_rgb		color;
 }				t_sphere;
 
