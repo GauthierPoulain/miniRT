@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/15 08:50:54 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/16 16:25:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define ALBEDO				.4
 # define LIGHT_MULT			10
 
-# define KEY_EXIT			99
-# define KEY_CHANGECAM		99
+# define KEY_EXIT			53
+# define KEY_CHANGECAM		8
 
 # define PI 3.14159265358979323846
 

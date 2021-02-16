@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:23:47 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/15 09:39:31 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/16 15:37:22 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ t_vector	get_triangle_normal(t_triangle *triangle)
 
 	a = vectorminus(triangle->p2, triangle->p1);
 	b = vectorminus(triangle->p3, triangle->p1);
-	return (vectorcross(a, b));
+	return (get_normalize(vectorcross(a, b)));
 }

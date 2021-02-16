@@ -49,7 +49,6 @@ SRCS = \
 	src/render/render_multithreads.c \
 	src/raytrace/raytrace_sphere.c \
 	src/raytrace/raytrace_plane.c \
-	src/raytrace/raytrace_square.c \
 	src/raytrace/raytrace_disk.c \
 	src/raytrace/raytrace_triangle.c \
 	src/raytrace/some_calcs.c \

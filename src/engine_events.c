@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 12:29:58 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 15:13:19 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/16 16:26:06 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	key_event(int key, t_engine *engine)
 		printf("key press = %d\n", key);
 	if (key == KEY_EXIT)
 		close_minirt(NULL);
+	if (key == KEY_CHANGECAM)
+		change_camera(engine);
 	engine->need_render = true;
 	return (0);
 }

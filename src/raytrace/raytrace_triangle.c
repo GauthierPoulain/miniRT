@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 08:39:35 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/16 13:27:01 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/16 15:36:01 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	intersect_triangle(t_ray ray, t_triangle tr, t_hit *hit)
 	vt = vectorcross(edge, vp);
 	if (dot(tr.normal, vt) < 0)
 		return (false);
-	hit->normal = tr.normal;
+	hit->normal = tmp_hit.normal;
 	hit->pos = tmp_hit.pos;
 	hit->t = tmp_hit.t;
 	return (true);
