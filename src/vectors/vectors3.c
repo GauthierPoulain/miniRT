@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:00:06 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/15 09:56:27 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/16 13:20:30 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ t_vector	vectorcross(t_vector v1, t_vector v2)
 {
 	return (get_vector(v1.y * v2.z - v1.z * v2.y,
 			v1.z * v2.x - v1.x * v2.z,
-			v1.x - v2.y - v1.y * v2.x));
+			v1.x * v2.y - v1.y * v2.x));
 }

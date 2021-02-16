@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 08:39:35 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/15 10:11:32 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/16 13:27:01 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	intersect_triangle(t_ray ray, t_triangle tr, t_hit *hit)
 	denom = dot(tr.normal, ray.dir);
 	if (fabs(denom) < EPSILON)
 		return (false);
-	t = (dot(tr.normal, ray.origin) + dot(tr.normal, tr.p1)) / denom;
+	t = (-dot(tr.normal, ray.origin) + dot(tr.normal, tr.p1)) / denom;
 	if (t < EPSILON || t > hit->t)
 		return (false);
 	tmp_hit.normal = tr.normal;
