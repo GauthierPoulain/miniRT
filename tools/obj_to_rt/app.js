@@ -1,11 +1,18 @@
 const fs = require("fs");
 const color = "255,255,255";
+const rand = false;
 const scenedefault = [
 	"R 500 500",
 	"A	.2	255,255,255",
 	"c 0,2,-50	0,0,0	70",
 	"l	2,2,-5	.8	0,255,255",
 ];
+
+function random_color() {
+	return `${Math.floor(Math.random() * 255)},${Math.floor(
+		Math.random() * 255
+	)},${Math.floor(Math.random() * 255)}`;
+}
 
 async function read_file(path) {
 	return new Promise(async (resolve) => {
@@ -33,7 +40,7 @@ async function remove_file_if_exist(path) {
 				resolve;
 			});
 		} catch (err) {
-			resolve();
+			resolve;
 		}
 	});
 }
@@ -64,7 +71,7 @@ async function main(args) {
 			newline += ` ${line}`;
 			local++;
 			if (local == 3) {
-				newline = `tr ${newline} ${color}\n`;
+				newline = `tr ${newline} ${rand ? random_color : color}\n`;
 				await add_line(respath, newline);
 				local = 0;
 				newline = "";
