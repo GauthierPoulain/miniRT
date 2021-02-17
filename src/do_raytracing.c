@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/16 15:32:44 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/16 16:47:43 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ t_rgb	*manage_light(t_thread_data *thread, t_scene *scene, t_hit *hit)
 	hit->color = mult_rgb_rgb(add_rgb_rgb(mult_rgb_double(
 					thread->engine->alight.color, thread->engine->alight.ratio),
 				data.diffuse), hit->color);
-	if (hit->color.g > 250)
-		printf("r = %d, g = %d, b = %d\n", hit->color.r, hit->color.g, hit->color.b);
 	min_rgb(&hit->color);
 	return (NULL);
 }

@@ -1,13 +1,18 @@
 const fs = require("fs");
 const color = "255,255,255";
-var file;
+const scenedefault = [
+	"R 500 500",
+	"A	.2	255,255,255",
+	"c 0,2,-50	0,0,0	70",
+	"l	2,2,-5	.8	0,255,255",
+];
 
 async function read_file(path) {
 	return new Promise(async (resolve) => {
 		fs.readFile(path, "utf-8", (err, data) => {
 			if (err) throw err.message;
 			else file = data;
-			resolve();
+			resolve(file);
 		});
 	});
 }
@@ -43,10 +48,10 @@ async function main(args) {
 	let path = args[0];
 	let respath = `${path.substr(0, path.lastIndexOf("."))}.rt`;
 	remove_file_if_exist(respath);
-	await read_file(path);
+	var file = await read_file(path);
 	file = file.replace(/\r/g, "");
 	file = file.split("\n");
-	add_line(respath, "R	500	500\nA	.2	255,255,255\nc	0,5,-20		0,0,0	70\nl	2,10,-20	.8	0,255,255\n")
+	add_line(respath, `${scenedefault.join("\n")}\n`);
 	let local = 0;
 	let newline = "";
 	for (const element of file) {
