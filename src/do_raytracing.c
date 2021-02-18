@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/16 16:47:43 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 10:15:30 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_hit	*closest_object(t_ray ray, t_scene *scene, void **object)
 	raytrace_planes(ray, scene, hit, object);
 	raytrace_disk(ray, scene, hit, object);
 	raytrace_triangle(ray, scene, hit, object);
+	raytrace_cylinder(ray, scene, hit, object);
 	return (hit);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:16:26 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/16 15:24:51 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 10:13:18 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,27 @@ void	add_triangle(t_list **lst, char *file)
 	triangle->normal = get_triangle_normal(triangle);
 	triangle->color = get_rgb(&file);
 	new = ft_lstnew(triangle);
+	if (!new)
+		close_minirt("error while parsing the scene");
+	ft_lstadd_back(lst, new);
+}
+
+void	add_cylinder(t_list **lst, char *file)
+{
+	t_cylinder	*cy;
+	t_list		*new;
+
+	cy = malloc(sizeof(t_cylinder));
+	if (!cy)
+		close_minirt("error while parsing the scene");
+	cy->pos = parse_vector(&file);
+	cy->dir = parse_vector(&file);
+	cy->radius = ft_atof(file) / 2;
+	file += ft_atof_len(file);
+	cy->height = ft_atof(file);
+	file += ft_atof_len(file);
+	cy->color = get_rgb(&file);
+	new = ft_lstnew(cy);
 	if (!new)
 		close_minirt("error while parsing the scene");
 	ft_lstadd_back(lst, new);
