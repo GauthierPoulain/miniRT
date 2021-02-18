@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 11:09:26 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 12:33:32 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_vector	cy_normal(t_hit *hit, const t_cylinder cy)
 	return (get_normalize(v));
 }
 
-
 bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 {
 	t_vector	p0;
@@ -50,12 +49,11 @@ bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 	if (delta < EPSILON)
 		return (false);
 	t = (-b - sqrt(delta)) / a;
-	c = distance(p0, vectoradd(ray.origin, vectormutliply(ray.dir, t)));
 	printf("c = %f\n", c);
-	if (t < EPSILON || t > hit->t ||  > cy.height)
+	if (t < EPSILON || t > hit->t)
 		return (false);
-	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
 	hit->t = t;
+	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
 	hit->normal = cy_normal(hit, cy);
 	return (true);
 }
