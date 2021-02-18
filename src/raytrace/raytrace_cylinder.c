@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 11:37:16 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 11:56:12 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ double	intersect_caps(t_ray ray, t_cylinder cy, t_vector pos)
 
 double	calc_c(t_ray ray, t_cylinder cy, t_vector t, t_vector b)
 {
-	return (dot(vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)), vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)))
-			- (cy.radius * cy.radius * dot(vectorminus(t, b), vectorminus(t, b))));
+	return (dot(vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)),
+			vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)))
+			- (cy.radius * cy.radius * dot(vectorminus(t, b),
+			vectorminus(t, b))));
 }
 
 void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
@@ -60,7 +62,7 @@ void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
 	a = dot(vectorcross(ray.dir, vectorminus(res->t, res->b)), vectorcross(ray.dir, vectorminus(res->t, res->b)));
 	b = 2 * dot(vectorcross(ray.dir, vectorminus(res->t, res->b)), vectorcross(vectorminus(ray.origin, res->b), vectorminus(res->t, res->b)));
 	c = calc_c(ray, cy, res->t, res->b);
-	if (pow(b, 2) - 4 * a * c >= EPSILON)
+	if (pow(b, 2) - 4 * a * c > EPSILON)
 	{
 		t = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
 		if (t < EPSILON)
