@@ -6,55 +6,93 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 12:33:32 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 08:10:33 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_vector	cy_normal(t_hit *hit, const t_cylinder cy)
+t_vector	process_normal(t_ray ray, t_vector normal)
 {
-	t_vector	c0;
-	t_vector	v;
+	if (dot(ray.dir, normal) < 0)
+		return (normal);
+	return (vectormutliply(normal, -1));
+}
 
-	if (hit->pos.x < cy.pos.x + cy.radius && hit->pos.x > cy.pos.x - cy.radius
-		&& hit->pos.z < cy.pos.z + cy.radius && hit->pos.z > cy.pos.z - cy.radius)
+double	intersect_caps(t_ray ray, t_cylinder cy, t_vector pos)
+{
+	t_vector	tmp;
+	double		a;
+	double		b;
+	double		t;
+
+	t = 0;
+	tmp = vectorminus(ray.origin, pos);
+	a = dot(tmp, cy.dir);
+	b = dot(ray.dir, cy.dir);
+	if (!(b == 0 || (a < 0 && b < 0) || (a > 0 && b > 0)))
+		t = -a / b;
+	return(t);
+}
+
+double	calc_c(t_ray ray, t_cylinder cy, t_vector t, t_vector b)
+{
+	return (dot(vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)), vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)))
+			- (cy.radius * cy.radius * dot(vectorminus(t, b), vectorminus(t, b))));
+}
+
+void	infinite_cylinder(t_ray ray, t_cylinder cy, t_vector *t1, t_vector *b1, double *tmin)
+{
+	double		t;
+	double		a;
+	double		b;
+	double		c;
+	t_vector	p;
+	t_vector	normal;
+
+	a = dot(vectorcross(ray.dir, vectorminus(*t1, *b1)), vectorcross(ray.dir, vectorminus(*t1, *b1)));
+	b = 2 * dot(vectorcross(ray.dir, vectorminus(*t1, *b1)), vectorcross(vectorminus(ray.origin, *b1), vectorminus(*t1, *b1)));
+	c = calc_c(ray, cy, *t1, *b1);
+	if (pow(b, 2) - 4 * a * c > 0)
 	{
-		if (hit->pos.y < cy.pos.y + cy.height
-			&& hit->pos.y > cy.pos.y + cy.height)
-			return (get_vector(0, 1, 0));
-		if (hit->pos.y < cy.pos.y && hit->pos.y > cy.pos.y)
-			return (get_vector(0, -1, 0));
+		t = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+		if (t < 0)
+			t = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+		p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
+		p = apply_rot(p, cy.dir, get_vector(0, 1, 0));
+		*b1 = apply_rot(*b1, cy.dir, get_vector(0, 1, 0));
+		*t1 = apply_rot(*t1, cy.dir, get_vector(0, 1, 0));
+		if (t < *tmin && p.y >= b1->y && p.y <= t1->y && (*tmin = t))
+		{
+			p = apply_rot(p, get_vector(0, 1, 0), cy.dir);
+			normal = get_normalize(vectorminus(p, cy.pos));
+		}
 	}
-	c0 = get_vector(cy.pos.x, hit->pos.y, cy.pos.z);
-	v = vectorminus(hit->pos, c0);
-	return (get_normalize(v));
 }
 
 bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 {
-	t_vector	p0;
-	double		a;
-	double		b;
-	double		c;
-	double		delta;
 	double		t;
+	double		tmin;
+	t_vector	b;
+	t_vector	v;
+	t_vector	pos;
+	t_vector	normal;
 
-	p0 = get_vector(ray.origin.x - cy.pos.x,
-		ray.origin.y - cy.pos.y, ray.origin.z - cy.pos.z);
-	a = ray.dir.x * ray.dir.x + ray.dir.z * ray.dir.z;
-	b = ray.dir.x * p0.x + ray.dir.z * p0.z;
-	c = p0.x * p0.x + p0.z * p0.z - cy.radius * cy.radius;
-	delta = b * b - a * c;
-	if (delta < EPSILON)
+	t = 0;
+	tmin = INFINITY;
+	b = vectorminus(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
+	v = vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
+	t = intersect_caps(ray, cy, v);
+	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
+	if (t > 0 && distance(pos, b) <= cy.radius && (tmin = t))
+		normal = process_normal(ray, cy.dir);
+	infinite_cylinder(ray, cy, &v, &b, &tmin);
+	if (!(tmin > 0 && tmin != INFINITY) || tmin > hit->t)
 		return (false);
-	t = (-b - sqrt(delta)) / a;
-	printf("c = %f\n", c);
-	if (t < EPSILON || t > hit->t)
-		return (false);
-	hit->t = t;
-	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-	hit->normal = cy_normal(hit, cy);
+	hit->t = tmin;
+	hit->pos = pos;
+	hit->normal = normal;
 	return (true);
 }
 

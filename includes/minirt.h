@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 10:15:08 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 07:53:46 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,5 +259,6 @@ void			add_triangle(t_list **lst, char *file);
 void			add_cylinder(t_list **lst, char *file);
 void			raytrace_cylinder(t_ray ray, t_scene *scene, t_hit *hit, void
 					**obj);
+t_vector		apply_rot(t_vector pos, t_vector dir, t_vector rot);
 
 #endif

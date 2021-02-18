@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:00:06 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/16 15:34:50 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 07:53:13 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,45 @@ t_vector	vectorcross(t_vector v1, t_vector v2)
 	return (get_vector(v1.y * v2.z - v1.z * v2.y,
 			v1.z * v2.x - v1.x * v2.z,
 			v1.x * v2.y - v1.y * v2.x));
+}
+
+double	magnitude(t_vector v)
+{
+	return (sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)));
+}
+
+t_vector	calc_rot(t_vector *c2, t_vector *c3, t_vector rot, t_vector to)
+{
+	t_vector	c1;
+	t_vector	v;
+	double		c;
+	double		s;
+	double		r;
+
+	v = vectorcross(to, rot);
+	c = dot(rot, to);
+	s = pow(magnitude(v), 2);
+	r = ((1 - c) / s);
+	c1 = get_vector(-r * (pow(v.y, 2) + pow(v.z, 2)) + 1, r * v.x * v.y - v.z, r * v.x * v.z + v.y);
+	*c2 = get_vector(r * v.x * v.y + v.z, -r * (pow(v.x, 2) + pow(v.z, 2)) + 1, r * v.y * v.x - v.x);
+	*c3 = get_vector(r * v.x * v.z - v.y, r * v.y * v.z - v.x, -r * (pow(v.x, 2) + pow(v.y, 2)) + 1);
+	return (c1);
+}
+
+t_vector	apply_rot(t_vector pos, t_vector dir, t_vector rot)
+{
+	t_vector	c1;
+	t_vector	c2;
+	t_vector	c3;
+	t_vector	prev;
+
+	if (dir.x == 0 && dir.y < 0 && dir.z == 0)
+		pos = get_vector(pos.x, pos.y, -pos.z);
+	else if (!(dir.x == 0 && dir.y && dir.z == 0))
+	{
+		prev = pos;
+		c1 = calc_rot(&c2, &c3, rot, dir);
+		pos = get_vector(dot(c1, prev), dot(c2, prev), dot(c3, prev));
+	}
+	return (pos);
 }
