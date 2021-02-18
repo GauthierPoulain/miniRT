@@ -6,11 +6,19 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 08:43:31 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 11:37:16 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+
+typedef struct s_resole
+{
+	double		tmin;
+	t_vector	t;
+	t_vector	b;
+	t_vector	normal;
+}				t_resolve;
 
 t_vector	process_normal(t_ray ray, t_vector normal)
 {
@@ -41,32 +49,31 @@ double	calc_c(t_ray ray, t_cylinder cy, t_vector t, t_vector b)
 			- (cy.radius * cy.radius * dot(vectorminus(t, b), vectorminus(t, b))));
 }
 
-void	infinite_cylinder(t_ray ray, t_cylinder cy, t_vector *t1, t_vector *b1, double *tmin)
+void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
 {
 	double		t;
 	double		a;
 	double		b;
 	double		c;
 	t_vector	p;
-	t_vector	normal;
 
-	a = dot(vectorcross(ray.dir, vectorminus(*t1, *b1)), vectorcross(ray.dir, vectorminus(*t1, *b1)));
-	b = 2 * dot(vectorcross(ray.dir, vectorminus(*t1, *b1)), vectorcross(vectorminus(ray.origin, *b1), vectorminus(*t1, *b1)));
-	c = calc_c(ray, cy, *t1, *b1);
-	if (pow(b, 2) - 4 * a * c > 0)
+	a = dot(vectorcross(ray.dir, vectorminus(res->t, res->b)), vectorcross(ray.dir, vectorminus(res->t, res->b)));
+	b = 2 * dot(vectorcross(ray.dir, vectorminus(res->t, res->b)), vectorcross(vectorminus(ray.origin, res->b), vectorminus(res->t, res->b)));
+	c = calc_c(ray, cy, res->t, res->b);
+	if (pow(b, 2) - 4 * a * c >= EPSILON)
 	{
 		t = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
-		if (t < 0)
+		if (t < EPSILON)
 			t = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
 		p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
 		p = apply_rot(p, cy.dir, get_vector(0, 1, 0));
-		*b1 = apply_rot(*b1, cy.dir, get_vector(0, 1, 0));
-		*t1 = apply_rot(*t1, cy.dir, get_vector(0, 1, 0));
-		if (t < *tmin && p.y >= b1->y && p.y <= t1->y)
+		res->b = apply_rot(res->b, cy.dir, get_vector(0, 1, 0));
+		res->t = apply_rot(res->t, cy.dir, get_vector(0, 1, 0));
+		if (t < res->tmin && p.y >= res->b.y && p.y <= res->t.y)
 		{
-			*tmin = t;
+			res->tmin = t;
 			p = apply_rot(p, get_vector(0, 1, 0), cy.dir);
-			normal = get_normalize(vectorminus(p, cy.pos));
+			res->normal = vectorminus(p, cy.pos);
 		}
 	}
 }
@@ -74,36 +81,32 @@ void	infinite_cylinder(t_ray ray, t_cylinder cy, t_vector *t1, t_vector *b1, dou
 bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 {
 	double		t;
-	double		tmin;
-	t_vector	b;
-	t_vector	v;
 	t_vector	pos;
-	t_vector	normal;
+	t_resolve	res;
 
-	t = 0;
-	tmin = INFINITY;
-	b = vectorminus(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
-	v = vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
-	t = intersect_caps(ray, cy, v);
+	res.tmin = INFINITY;
+	res.b = vectorminus(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
+	res.t = vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
+	t = intersect_caps(ray, cy, res.t);
 	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-	if (t > 0 && distance(pos, v) <= cy.radius)
+	if (t >= EPSILON && distance(pos, res.t) < cy.radius)
 	{
-		tmin = t;
-		normal = process_normal(ray, cy.dir);
+		res.tmin = t;
+		res.normal = process_normal(ray, cy.dir);
 	}
-	t = intersect_caps(ray, cy, b);
+	t = intersect_caps(ray, cy, res.b);
 	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-	if (t > 0 && distance(pos, b) <= cy.radius)
+	if (t >= EPSILON && distance(pos, res.b) < cy.radius)
 	{
-		tmin = t;
-		normal = process_normal(ray, cy.dir);
+		res.tmin = t;
+		res.normal = process_normal(ray, cy.dir);
 	}
-	infinite_cylinder(ray, cy, &v, &b, &tmin);
-	if (!(tmin > 0 && tmin != INFINITY) || tmin > hit->t)
+	infinite_cylinder(ray, cy, &res);
+	if (res.tmin <= EPSILON || res.tmin >= INFINITY || res.tmin > hit->t)
 		return (false);
-	hit->t = tmin;
-	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, tmin));
-	hit->normal = get_normalize(normal);
+	hit->t = res.tmin;
+	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, res.tmin));
+	hit->normal = get_normalize(res.normal);
 	return (true);
 }
 
