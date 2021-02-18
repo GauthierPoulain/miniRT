@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 11:56:12 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 14:18:44 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ double	intersect_caps(t_ray ray, t_cylinder cy, t_vector pos)
 
 double	calc_c(t_ray ray, t_cylinder cy, t_vector t, t_vector b)
 {
-	return (dot(vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)),
-			vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)))
-			- (cy.radius * cy.radius * dot(vectorminus(t, b),
+	return (dot(vectorcross(vectorminus(ray.origin, b), vectorminus(t, b)), \
+		vectorcross(vectorminus(ray.origin, b), vectorminus(t, b))) - \
+		(cy.radius * cy.radius * dot(vectorminus(t, b), \
 			vectorminus(t, b))));
 }
 
@@ -91,14 +91,14 @@ bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 	res.t = vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
 	t = intersect_caps(ray, cy, res.t);
 	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-	if (t >= EPSILON && distance(pos, res.t) < cy.radius)
+	if (t > EPSILON && distance(pos, res.t) < cy.radius)
 	{
 		res.tmin = t;
 		res.normal = process_normal(ray, cy.dir);
 	}
 	t = intersect_caps(ray, cy, res.b);
 	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-	if (t >= EPSILON && distance(pos, res.b) < cy.radius)
+	if (t > EPSILON && distance(pos, res.b) < cy.radius)
 	{
 		res.tmin = t;
 		res.normal = process_normal(ray, cy.dir);

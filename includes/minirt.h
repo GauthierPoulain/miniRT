@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 07:53:46 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 14:01:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define DEBUG				1
 
-# define EPSILON			0.001
+# define EPSILON			0.00001
 # define ALBEDO				.4
 # define LIGHT_MULT			10
 
