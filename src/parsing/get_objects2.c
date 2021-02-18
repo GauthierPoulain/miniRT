@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:16:26 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 10:13:18 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 08:21:42 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void	add_cylinder(t_list **lst, char *file)
 		close_minirt("error while parsing the scene");
 	cy->pos = parse_vector(&file);
 	cy->dir = parse_vector(&file);
+	cy->dir.x = to_rad(90 * cy->dir.x);
+	cy->dir.y = to_rad(90 * cy->dir.y);
+	cy->dir.z = to_rad(90 * cy->dir.z);
 	cy->radius = ft_atof(file) / 2;
 	file += ft_atof_len(file);
 	cy->height = ft_atof(file);

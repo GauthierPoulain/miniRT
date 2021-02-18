@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 08:10:33 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/18 08:43:31 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ void	infinite_cylinder(t_ray ray, t_cylinder cy, t_vector *t1, t_vector *b1, dou
 		p = apply_rot(p, cy.dir, get_vector(0, 1, 0));
 		*b1 = apply_rot(*b1, cy.dir, get_vector(0, 1, 0));
 		*t1 = apply_rot(*t1, cy.dir, get_vector(0, 1, 0));
-		if (t < *tmin && p.y >= b1->y && p.y <= t1->y && (*tmin = t))
+		if (t < *tmin && p.y >= b1->y && p.y <= t1->y)
 		{
+			*tmin = t;
 			p = apply_rot(p, get_vector(0, 1, 0), cy.dir);
 			normal = get_normalize(vectorminus(p, cy.pos));
 		}
@@ -85,14 +86,24 @@ bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 	v = vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
 	t = intersect_caps(ray, cy, v);
 	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-	if (t > 0 && distance(pos, b) <= cy.radius && (tmin = t))
+	if (t > 0 && distance(pos, v) <= cy.radius)
+	{
+		tmin = t;
 		normal = process_normal(ray, cy.dir);
+	}
+	t = intersect_caps(ray, cy, b);
+	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
+	if (t > 0 && distance(pos, b) <= cy.radius)
+	{
+		tmin = t;
+		normal = process_normal(ray, cy.dir);
+	}
 	infinite_cylinder(ray, cy, &v, &b, &tmin);
 	if (!(tmin > 0 && tmin != INFINITY) || tmin > hit->t)
 		return (false);
 	hit->t = tmin;
-	hit->pos = pos;
-	hit->normal = normal;
+	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, tmin));
+	hit->normal = get_normalize(normal);
 	return (true);
 }
 
