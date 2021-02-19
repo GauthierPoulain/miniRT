@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:02:09 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 15:07:38 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 14:11:55 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ t_vector	set_ray_direction(t_engine *engine, t_cam cam, int x, int y)
 			(engine->size_y / 2 - y) + cam.dir.y,
 			((engine->size_y / 2) / tan((cam.fov * PI / 180) / 2))
 			+ cam.dir.z);
+	dir = vectoradd(dir, cam.dir);
 	return (dir);
 }

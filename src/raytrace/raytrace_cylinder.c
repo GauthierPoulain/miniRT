@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/19 12:24:43 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 13:33:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
 		if (t < res->tmin && p.y >= res->b.y && p.y <= res->t.y)
 		{
 			res->tmin = t;
+			p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
 			p = apply_rot(p, get_vector(0, 1, 0), cy.dir);
 			res->normal = get_normalize(vectorminus(p, cy.pos));
 			printf("x = %.20f, y = %f, z = %f\n", res->normal.x, res->normal.y, res->normal.z);
@@ -107,7 +108,7 @@ bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 		res.normal = process_normal(ray, cy.dir);
 	}
 	infinite_cylinder(ray, cy, &res);
-	if (res.tmin <= EPSILON || res.tmin == INFINITY || res.tmin > hit->t)
+	if (res.tmin <= EPSILON || res.tmin == INFINITY || res.tmin >= hit->t)
 		return (false);
 	hit->t = res.tmin;
 	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, res.tmin));
