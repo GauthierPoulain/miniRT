@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:46:20 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/16 15:36:56 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 11:14:14 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_vector	get_normalize(t_vector vec)
 	double		w;
 
 	w = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-	w = ft_max_double(w, EPSILON);
 	p.x = vec.x / w;
 	p.y = vec.y / w;
 	p.z = vec.z / w;
@@ -46,6 +45,5 @@ bool	vector_limit(t_vector vec, double min, double max)
 		return (false);
 	else if (vec.x > max || vec.y > max || vec.z > max)
 		return (false);
-	else
-		return (true);
+	return (true);
 }
