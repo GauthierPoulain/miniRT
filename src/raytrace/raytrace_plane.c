@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 01:37:38 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/10 11:01:40 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/20 02:54:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ bool	intersect_plane(t_ray ray, t_plane plane, t_hit *hit)
 		if (t < EPSILON || t > hit->t)
 			return (false);
 		hit->normal = plane.normal;
+		hit->t = t;
 		hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-		hit->t = distance(ray.origin, hit->pos);
 		return (true);
 	}
 	return (false);

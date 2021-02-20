@@ -104,9 +104,9 @@ re: fclean
 soft: 
 	@$(MAKE) all 
 	@$(MAKE) -C libft 
-	@printf "[ $(_GREEN)$(_BOLD)>+$(_END) ][ building ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
+	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)>+$(_END) ][ building ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libft.a $(MLX)
-	@printf "[ $(_GREEN)$(_BOLD):)$(_END) ][ done ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
+	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD):)$(_END) ][ done ] $(_BLUE)$(_BOLD)$(NAME)$(_END)\n"
 
 norm:
 	@norminettev2 libft src includes
@@ -123,7 +123,7 @@ test: soft
 	./$(NAME) ./scenes/test.rt
 
 save: soft
-	./$(NAME) ./scenes/test_lights.rt --save
+	./$(NAME) ./scenes/test.rt --save
 	# open ./save.bmp
 
 .PHONY: all mlx clean fclean re soft norm leaks test save

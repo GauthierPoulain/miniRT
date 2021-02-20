@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/19 13:33:05 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/20 07:00:15 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_resole
 
 t_vector	process_normal(t_ray ray, t_vector normal)
 {
-	if (dot(ray.dir, normal) < 0)
+	if (dot(ray.dir, normal) < EPSILON)
 		return (normal);
 	return (vectormutliply(normal, -1));
 }
@@ -67,19 +67,22 @@ void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
 		t = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
 		if (t < EPSILON)
 			t = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
-		printf("t = %.20f\n", t);
 		p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-		printf("x = %.20f, y = %f, z = %f\n", p.x, p.y, p.z);
 		p = apply_rot(p, cy.dir, get_vector(0, 1, 0));
 		res->b = apply_rot(res->b, cy.dir, get_vector(0, 1, 0));
 		res->t = apply_rot(res->t, cy.dir, get_vector(0, 1, 0));
 		if (t < res->tmin && p.y >= res->b.y && p.y <= res->t.y)
 		{
-			res->tmin = t;
+			// p = vectorcross(vectoradd(ray.origin, vectormutliply(ray.dir, t)), cy.pos);
 			p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
+			res->tmin = t;
+			// printf("before : x = %.20f, y = %.20f, z = %.20f\n", p.x, p.y, p.z);
 			p = apply_rot(p, get_vector(0, 1, 0), cy.dir);
-			res->normal = get_normalize(vectorminus(p, cy.pos));
-			printf("x = %.20f, y = %f, z = %f\n", res->normal.x, res->normal.y, res->normal.z);
+			// printf("dot = %f\n", dot(ray.dir, p));
+			// printf("after  : x = %.20f, y = %.20f, z = %.20f\n", p.x, p.y, p.z);
+			res->normal = vectorminus(p, cy.pos);
+			
+			printf("x = %.20f, y = %.20f, z = %.20f\n", res->normal.x, res->normal.y, res->normal.z);
 		}
 	}
 }
@@ -90,6 +93,8 @@ bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 	t_vector	pos;
 	t_resolve	res;
 
+	if (cy.height < EPSILON || cy.radius < EPSILON)
+		return (false);
 	res.tmin = INFINITY;
 	res.b = vectorminus(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
 	res.t = vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir), cy.height / 2));
@@ -108,11 +113,11 @@ bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 		res.normal = process_normal(ray, cy.dir);
 	}
 	infinite_cylinder(ray, cy, &res);
-	if (res.tmin <= EPSILON || res.tmin == INFINITY || res.tmin >= hit->t)
+	if (res.tmin < EPSILON || res.tmin == INFINITY || res.tmin > hit->t)
 		return (false);
 	hit->t = res.tmin;
 	hit->pos = vectoradd(ray.origin, vectormutliply(ray.dir, res.tmin));
-	hit->normal = res.normal;
+	hit->normal = get_normalize(res.normal);
 	return (true);
 }
 
