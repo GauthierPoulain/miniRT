@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/20 07:00:15 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/20 14:08:29 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,11 @@ void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
 		res->t = apply_rot(res->t, cy.dir, get_vector(0, 1, 0));
 		if (t < res->tmin && p.y >= res->b.y && p.y <= res->t.y)
 		{
-			// p = vectorcross(vectoradd(ray.origin, vectormutliply(ray.dir, t)), cy.pos);
-			p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
 			res->tmin = t;
-			// printf("before : x = %.20f, y = %.20f, z = %.20f\n", p.x, p.y, p.z);
-			p = apply_rot(p, get_vector(0, 1, 0), cy.dir);
-			// printf("dot = %f\n", dot(ray.dir, p));
-			// printf("after  : x = %.20f, y = %.20f, z = %.20f\n", p.x, p.y, p.z);
-			res->normal = vectorminus(p, cy.pos);
-			
-			printf("x = %.20f, y = %.20f, z = %.20f\n", res->normal.x, res->normal.y, res->normal.z);
+			p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
+			p = apply_rot(p,  get_vector(0, 1, 0), cy.dir);
+			p = apply_rot(p, cy.dir, get_vector(0, 1, 0));
+			res->normal = vectorminus(p, cy.pos);			
 		}
 	}
 }
