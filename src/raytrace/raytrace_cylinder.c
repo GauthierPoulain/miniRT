@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/20 14:08:29 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 04:08:21 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
 		{
 			res->tmin = t;
 			p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-			p = apply_rot(p,  get_vector(0, 1, 0), cy.dir);
 			p = apply_rot(p, cy.dir, get_vector(0, 1, 0));
-			res->normal = vectorminus(p, cy.pos);			
+			p.y = apply_rot(cy.pos, cy.dir, get_vector(0, 1, 0)).y;
+			p = apply_rot(p, get_vector(0, 1, 0), cy.dir);
+			res->normal = vectorminus(p, cy.pos);
+			// printf("x = %f, y = %f, z = %f\n", res->normal.x, res->normal.y, res->normal.z);
 		}
 	}
 }
