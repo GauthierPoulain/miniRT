@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/20 06:18:22 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 13:15:29 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,5 +260,9 @@ void			add_cylinder(t_list **lst, char *file);
 void			raytrace_cylinder(t_ray ray, t_scene *scene, t_hit *hit, void
 					**obj);
 t_vector		apply_rot(t_vector pos, t_vector dir, t_vector rot);
+t_vector		process_normal_cy(t_ray ray, t_vector normal);
+double			intersect_caps_cy(t_ray ray, t_cylinder cy, t_vector pos);
+double			calc_c_cy(t_ray ray, t_cylinder cy, t_vector t, t_vector b);
+t_vector		calclanormaleparceqttroplongue(t_cylinder cy, t_vector p);
 
 #endif

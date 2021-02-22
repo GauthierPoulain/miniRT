@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/18 07:02:04 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 12:31:02 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	parse_scene(char **file, t_engine *engine)
 	int		i;
 
 	init_scene_parts(engine);
-	i = 0;
-	while (file[i])
+	i = -1;
+	while (file[++i])
 	{
 		if (is_id(file[i], "A"))
 			add_alight(engine, file[i] + 1);
@@ -76,7 +76,6 @@ void	parse_scene(char **file, t_engine *engine)
 			add_triangle(&engine->scene.triangles, file[i] + 2);
 		else if (is_id(file[i], "cy"))
 			add_cylinder(&engine->scene.cylinders, file[i] + 2);
-		i++;
 	}
 }
 

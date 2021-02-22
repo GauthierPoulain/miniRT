@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:00:06 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/21 03:13:57 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 13:12:26 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ double	distance(t_vector p1, t_vector p2)
 
 t_vector	vectorcross(t_vector v1, t_vector v2)
 {
-	t_vector cross;
-	
+	t_vector	cross;
+
 	cross.x = v1.y * v2.z - v1.z * v2.y;
 	cross.y = v1.z * v2.x - v1.x * v2.z;
 	cross.z = v1.x * v2.y - v1.y * v2.x;
@@ -45,12 +45,12 @@ t_vector	calc_rot(t_vector *c2, t_vector *c3, t_vector rot, t_vector to)
 	c = dot(rot, to);
 	s = pow(magnitude(v), 2);
 	r = ((1 - c) / s);
-	c1 = get_vector(-r * (pow(v.y, 2) + pow(v.z, 2)) + 1, r * v.x * \
-		v.y - v.z, r * v.x * v.z + v.y);
-	*c2 = get_vector(r * v.x * v.y + v.z, -r * (pow(v.x, 2) + \
-		pow(v.z, 2)) + 1, r * v.y * v.x - v.x);
-	*c3 = get_vector(r * v.x * v.z - v.y, r * v.y * v.z - v.x, -r * \
-		(pow(v.x, 2) + pow(v.y, 2)) + 1);
+	c1 = get_vector(-r * (pow(v.y, 2) + pow(v.z, 2)) + 1, r * v.x
+			* v.y - v.z, r * v.x * v.z + v.y);
+	*c2 = get_vector(r * v.x * v.y + v.z, -r * (pow(v.x, 2)
+				+ pow(v.z, 2)) + 1, r * v.y * v.x - v.x);
+	*c3 = get_vector(r * v.x * v.z - v.y, r * v.y * v.z - v.x, -r
+			* (pow(v.x, 2) + pow(v.y, 2)) + 1);
 	return (c1);
 }
 

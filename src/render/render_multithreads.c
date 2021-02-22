@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 13:41:20 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/21 03:29:02 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 13:27:00 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ void	*render_thread(t_thread_data *thread)
 	pthread_exit(NULL);
 }
 
-static void	*wait_thread_end(pthread_t *tid, long nproc)
+static void	*wait_thread_end(pthread_t *tid, long nproc, t_thread_data *thread)
 {
 	int	id;
 
 	id = 0;
 	while (id < nproc)
 		pthread_join(tid[id++], NULL);
+	free(tid);
+	free(thread);
 	return (NULL);
 }
 
@@ -68,18 +70,17 @@ void	*render_scene_multithread(t_engine *engine, long nproc)
 		if (!pthread_create(&tid[id], NULL, (void *)render_thread, &thread[id]))
 			id++;
 	}
-	return (wait_thread_end(tid, nproc));
+	return (wait_thread_end(tid, nproc, thread));
 }
 
 void	render(t_engine *engine)
 {
-	// render_scene_multithread(engine, sysconf(_SC_NPROCESSORS_ONLN));
-	render_scene_multithread(engine, 1);
+	render_scene_multithread(engine, sysconf(_SC_NPROCESSORS_ONLN));
 	if (engine->save)
 		return ;
 	mlx_clear_window(engine->mlx, engine->window);
 	mlx_put_image_to_window(engine->mlx, engine->window,
 		engine->frame->img, 0, 0);
 	mlx_do_sync(engine->mlx);
-	engine->need_render = false;
+	// engine->need_render = false;
 }

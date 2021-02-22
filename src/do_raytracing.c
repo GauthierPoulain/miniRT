@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/20 02:25:24 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 12:28:22 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_hit	*closest_object(t_ray ray, t_scene *scene, void **object)
 	raytrace_disk(ray, scene, hit, object);
 	raytrace_triangle(ray, scene, hit, object);
 	raytrace_cylinder(ray, scene, hit, object);
+	raytrace_square(ray, scene, hit, object);
 	return (hit);
 }
 
@@ -39,7 +40,7 @@ void	process_light(t_light_managment *data, t_hit *hit, t_scene *scene)
 	if (distance(hit->pos, data->light->pos) < data->hit_obstacle->t)
 	{
 		data->normal_dot_light = ft_dmax(dot(hit->normal,
-				data->to_light.dir), 0) * (LIGHT_MULT * data->light->brightness)
+					data->to_light.dir), 0) * (LIGHT_MULT * data->light->brightness)
 			/ distance(hit->pos, data->light->pos);
 		data->color_l = mult_rgb_double(add_rgb_rgb(mult_rgb_double(
 						data->light->color,

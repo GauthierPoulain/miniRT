@@ -24,7 +24,7 @@ NAME = miniRT
 
 CC = clang
 # CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror -g
 MAKE = make --no-print-directory
 RECOMPILE_MLX = 0
 
@@ -52,7 +52,9 @@ SRCS = \
 	src/raytrace/raytrace_plane.c \
 	src/raytrace/raytrace_disk.c \
 	src/raytrace/raytrace_triangle.c \
+	src/raytrace/cylinder2.c \
 	src/raytrace/raytrace_cylinder.c \
+	src/raytrace/raytrace_square.c \
 	src/raytrace/some_calcs.c \
 	src/do_raytracing.c \
 	src/minirt.c \
