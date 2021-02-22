@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 23:13:44 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 12:23:25 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 15:22:49 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,24 @@ double	ft_atof(char *str)
 {
 	double		ent;
 	double		dec;
+	size_t		i;
+	int			neg;
 
 	ent = ft_atoi(str);
+	neg = 0;
+	if (ent == 0)
+	{
+		i = 0;
+		while (str[i] && i < ft_atoi_len(str))
+			if (str[i++] == '-')
+				neg++;
+	}
 	str += ft_atoi_len(str);
 	if (*str != '.')
 		return (ent);
 	dec = ft_atoi(++str);
 	dec /= ft_pow(10, ft_nblen(dec));
-	if (ent < 0)
+	if (ent < 0 || neg > 0)
 		return (ent - dec);
 	else
 		return (ent + dec);
