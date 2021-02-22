@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:06:05 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 14:56:06 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 13:43:12 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	get_win_size(t_engine *engine, int save)
 void	init_window(t_engine *engine)
 {
 	engine->window = mlx_new_window(engine->mlx, engine->size_x,
-			engine->size_y, "miniRT by G@PoUl@i_Le_BoSs");
+			engine->size_y, "xX - miniRT by G@PoUl@i_Le_BoSs - Xx");
 }

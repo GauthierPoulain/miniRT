@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 13:41:20 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 13:27:00 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 13:42:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ void	render(t_engine *engine)
 	mlx_put_image_to_window(engine->mlx, engine->window,
 		engine->frame->img, 0, 0);
 	mlx_do_sync(engine->mlx);
-	// engine->need_render = false;
+	engine->need_render = false;
 }

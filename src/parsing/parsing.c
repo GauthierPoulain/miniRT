@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 12:31:02 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 13:41:19 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	check_scene(t_engine *engine)
 	alight = 0;
 	resolution = 0;
 	i = -1;
+	if (!engine->raw_file)
+		close_minirt("empty scene");
 	while (engine->raw_file[++i])
 	{
 		if (is_id(engine->raw_file[i], "A"))

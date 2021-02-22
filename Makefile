@@ -99,7 +99,9 @@ endif
 	@$(MAKE) fclean -C ./libft
 	@$(RM) libmlx.dylib
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_RED)$(_BOLD)-$(_END) ][ removing ] $(_BLUE)$(_BOLD)$(NAME) $(_END)\n"
-	@$(RM) $(NAME)	
+	@$(RM) $(NAME)
+	@${RM} *.bmp
+	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_RED)$(_BOLD)-$(_END) ][ removing ] $(_BLUE)$(_BOLD)bmp files $(_END)\n"
 
 re: fclean
 	@$(MAKE) all
