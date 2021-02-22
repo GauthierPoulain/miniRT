@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/21 05:45:09 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 12:08:14 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,15 @@ void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
 		if (t < res->tmin && p.y >= res->b.y && p.y <= res->t.y)
 		{
 			res->tmin = t;
-
+			t_vector	tkt;
 			p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-			p = apply_rot(p, cy.dir, get_vector(0, 1, 0));
-			p = apply_rot(p, get_vector(0, 1, 0), cy.dir);
-			p.y = apply_rot(cy.pos, cy.dir, get_vector(0, 1, 0)).y;
 
-			res->normal = vectorminus(p, cy.pos);
-			// printf("x = %f, y = %f, z = %f\n", res->normal.x, res->normal.y, res->normal.z);
+
+			
+			tkt = vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir), dot(vectorminus(p, cy.pos), get_normalize(cy.dir))));
+			// printf("dot = %f\n", dot(p, cy.dir));
+			// printf("x = %f, y = %f, z = %f\n", cy.pos.x, cy.pos.y, cy.pos.z);
+			res->normal = vectorminus(tkt, p);
 		}
 	}
 }
