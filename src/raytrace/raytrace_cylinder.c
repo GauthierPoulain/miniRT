@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 13:01:16 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 09:36:13 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 	if (cy.height < EPSILON || cy.radius < EPSILON)
 		return (false);
 	res.tmin = INFINITY;
-	res.b = vectorminus(cy.pos, vectormutliply(get_normalize(cy.dir),
+	res.b = vectorminus(cy.pos, vectormutliply(cy.dir,
 				cy.height / 2));
-	res.t = vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir),
+	res.t = vectoradd(cy.pos, vectormutliply(cy.dir,
 				cy.height / 2));
 	check_caps(ray, &res, cy);
 	infinite_cylinder(ray, cy, &res);
