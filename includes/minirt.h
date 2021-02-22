@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 13:15:29 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 16:18:54 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define MULTITHREADING		1
-
-# define DEBUG				1
+# define DEBUG				0
 
 # define EPSILON			0.00001
 # define ALBEDO				.4
-# define LIGHT_MULT			10
+# define LIGHT_MULT			2
 
 # define KEY_EXIT			53
 # define KEY_CHANGECAM		8

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:45:55 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/21 03:21:13 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 16:25:27 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	intersect_sphere(const t_ray ray, const t_sphere sphere, t_hit *hit)
 	if (!secdegsolve(get_vector(dot(ray.dir, ray.dir), 2 * dot(ray.dir, vect),
 				dot(vect, vect) - pow(sphere.radius, 2)), &t1, &t2))
 		return (false);
-	if ((t1 < 0 && t2 < 0) || (t1 > hit->t && t2 > hit->t))
+	if ((t1 < 0 && t2 < 0) || (t1 >= hit->t && t2 >= hit->t))
 		return (false);
 	else if (t1 <= 0)
 		t1 = t2;

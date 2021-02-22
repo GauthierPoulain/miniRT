@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 13:41:19 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 16:12:00 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,34 @@ void	init_scene_parts(t_engine *engine)
 	engine->scene.cylinders = NULL;
 }
 
+void	parse(char *line, t_engine *engine)
+{
+	if (is_id(line, "A"))
+		add_alight(engine, line + 1);
+	else if (is_id(line, "c"))
+		add_camera(&engine->scene.cams, line + 1);
+	else if (is_id(line, "sp"))
+		add_sphere(&engine->scene.spheres, line + 2);
+	else if (is_id(line, "l"))
+		add_light(&engine->scene.lights, line + 1);
+	else if (is_id(line, "pl"))
+		add_plane(&engine->scene.planes, line + 2);
+	else if (is_id(line, "sq"))
+		add_square(&engine->scene.squares, line + 2);
+	else if (is_id(line, "ds"))
+		add_disk(&engine->scene.disks, line + 2);
+	else if (is_id(line, "tr"))
+		add_triangle(&engine->scene.triangles, line + 2);
+	else if (is_id(line, "cy"))
+		add_cylinder(&engine->scene.cylinders, line + 2);
+	else if ((ft_strlen(line) == 1 && *line == '\n') || is_id(line, "R")
+		|| DEBUG)
+		;
+	else
+		close_minirt(ft_strjoin("invalid item in scene on line : '",
+		ft_strjoin(line, "'")));
+}
+
 void	parse_scene(char **file, t_engine *engine)
 {
 	int		i;
@@ -60,24 +88,7 @@ void	parse_scene(char **file, t_engine *engine)
 	i = -1;
 	while (file[++i])
 	{
-		if (is_id(file[i], "A"))
-			add_alight(engine, file[i] + 1);
-		else if (is_id(file[i], "c"))
-			add_camera(&engine->scene.cams, file[i] + 1);
-		else if (is_id(file[i], "sp"))
-			add_sphere(&engine->scene.spheres, file[i] + 2);
-		else if (is_id(file[i], "l"))
-			add_light(&engine->scene.lights, file[i] + 1);
-		else if (is_id(file[i], "pl"))
-			add_plane(&engine->scene.planes, file[i] + 2);
-		else if (is_id(file[i], "sq"))
-			add_square(&engine->scene.squares, file[i] + 2);
-		else if (is_id(file[i], "ds"))
-			add_disk(&engine->scene.disks, file[i] + 2);
-		else if (is_id(file[i], "tr"))
-			add_triangle(&engine->scene.triangles, file[i] + 2);
-		else if (is_id(file[i], "cy"))
-			add_cylinder(&engine->scene.cylinders, file[i] + 2);
+		parse(file[i], engine);
 	}
 }
 
