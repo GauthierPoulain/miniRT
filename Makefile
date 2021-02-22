@@ -23,8 +23,8 @@ _IWHITE=\033[47m
 NAME = miniRT
 
 CC = clang
-# CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
-CFLAGS = -Wall -Wextra -Werror -pg
+CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
+# CFLAGS = -Wall -Wextra -Werror -O3
 MAKE = make --no-print-directory
 RECOMPILE_MLX = 0
 

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 16:18:54 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 09:41:41 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ typedef struct s_light_managment
 	t_light	*light;
 	t_ray	to_light;
 	void	*obstacle;
-	t_hit	*hit_obstacle;
+	t_hit	hit_obstacle;
 	t_rgb	diffuse;
 	t_rgb	color_l;
 	double	normal_dot_light;
