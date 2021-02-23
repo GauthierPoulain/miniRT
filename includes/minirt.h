@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 09:41:41 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 12:34:57 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define DEBUG				0
+# define DEBUG				1
 
 # define EPSILON			0.00001
 # define ALBEDO				.4

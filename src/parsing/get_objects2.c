@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:16:26 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 09:37:11 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 13:44:19 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	add_square(t_list **lst, char *file)
 	square->normal.y = to_rad(90 * square->normal.y);
 	square->normal.z = to_rad(90 * square->normal.z);
 	set_normalize(&square->normal);
-	square->size = ft_atof(file);
+	square->size = ft_atof(file) / 2;
 	file += ft_atof_len(file);
 	square->color = get_rgb(&file);
 	new = ft_lstnew(square);
