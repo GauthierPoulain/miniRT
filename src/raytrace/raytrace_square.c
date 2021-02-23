@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:11:58 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/23 15:12:44 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 16:09:25 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,26 @@ bool	intersect_square(t_ray ray, t_square sq, t_hit *hit)
 		tmp_hit.pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
 		
 		r0 = sq.normal;
-		r0.x *= to_rad(90);
+		r0.z = to_rad(sq.normal.z * 90);
+
+		printf("r0 y = %f\n", r0.y);
 
 		p1 = vectoradd(sq.origin, vectormutliply(r0, get_ray_t(sq.size)));
-		r0.z *= to_rad(90);
+		r0.x = to_rad(sq.normal.x * 90);
 		p2 = vectoradd(sq.origin, vectormutliply(r0, get_ray_t(sq.size)));
-		r0.z *= to_rad(90);
+		r0.x = to_rad(sq.normal.x * 180);
 		p3 = vectoradd(sq.origin, vectormutliply(r0, get_ray_t(sq.size)));
-		r0.z *= to_rad(90);
+		r0.x = to_rad(sq.normal.x * 270);
 		p4 = vectoradd(sq.origin, vectormutliply(r0, get_ray_t(sq.size)));
 
-		if (dot(p1, vectorminus(sq.origin, tmp_hit.pos)) > sq.size)
+	printf("%f\n", p1.x);
+		if (dot(vectorminus(sq.origin, p1), vectorminus(sq.origin, tmp_hit.pos)) > sq.size)
 			return (false);
-		if (dot(p2, vectorminus(sq.origin, tmp_hit.pos)) > sq.size)
+		if (dot(vectorminus(sq.origin, p2), vectorminus(sq.origin, tmp_hit.pos)) > sq.size)
 			return (false);
-		if (dot(p3, vectorminus(sq.origin, tmp_hit.pos)) > sq.size)
+		if (dot(vectorminus(sq.origin, p3), vectorminus(sq.origin, tmp_hit.pos)) > sq.size)
 			return (false);
-		if (dot(p4, vectorminus(sq.origin, tmp_hit.pos)) > sq.size)
+		if (dot(vectorminus(sq.origin, p4), vectorminus(sq.origin, tmp_hit.pos)) > sq.size)
 			return (false);
 
 
