@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/23 12:34:57 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/24 09:55:26 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,6 @@ t_vector		process_normal_cy(t_ray ray, t_vector normal);
 double			intersect_caps_cy(t_ray ray, t_cylinder cy, t_vector pos);
 double			calc_c_cy(t_ray ray, t_cylinder cy, t_vector t, t_vector b);
 t_vector		calclanormaleparceqttroplongue(t_cylinder cy, t_vector p);
+double			magnitude(t_vector v);
 
 #endif
