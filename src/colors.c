@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:40:52 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/09 13:53:18 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/24 14:37:22 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_rgb	mult_rgb_rgb(t_rgb rgb, t_rgb mult)
 
 t_rgb	mult_rgb_double(t_rgb rgb, double mult)
 {
-	return (creatergb(rgb.r * mult, rgb.g * mult, rgb.b * mult));
+	return (creatergb((double)rgb.r * mult, (double)rgb.g * mult, (double)rgb.b * mult));
 }
 
 t_rgb	add_rgb_rgb(t_rgb rgb, t_rgb add)

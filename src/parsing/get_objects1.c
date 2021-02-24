@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:19:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 14:14:08 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/24 14:02:25 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	add_camera(t_list **lst, char *file)
 	if (!vector_limit(cam->dir, -1, 1))
 		close_minirt("camera rotation is out of range [-1, 1]");
 	if (!ft_isinrange(cam->fov, 0, 180))
-		close_minirt("cmaera fov is out of range [0, 180]");
+		close_minirt("camera fov is out of range [0, 180]");
 	new = ft_lstnew(cam);
 	if (!new)
 		close_minirt("error while parsing the scene");
