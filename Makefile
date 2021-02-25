@@ -47,7 +47,6 @@ SRCS = \
 	src/parsing/parsing.c \
 	src/parsing/get_objects1.c \
 	src/parsing/get_objects2.c \
-	src/render/render_multithreads.c \
 	src/raytrace/raytrace_sphere.c \
 	src/raytrace/raytrace_plane.c \
 	src/raytrace/raytrace_disk.c \
@@ -67,12 +66,21 @@ SRCS = \
 	src/engine_events.c \
 	src/frame_control.c \
 	src/save.c \
-	
+	src/render/monothread.c \
+	src/render/multithreading_bonus.c \
+
 %.o: %.c $(HEADER)
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-all: ${NAME}
+all: ${NAME} $(MANDATORY_OBJS)
+
+bonus: CFLAGS += -DBONUS
+bonus: rebonus
+bonus: all
+
+rebonus:
+	@$(RM) src/render/*.o
 
 mlx:
 ifeq ($(shell uname -s),Darwin)

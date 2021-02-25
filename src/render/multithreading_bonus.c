@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_multithreads.c                              :+:      :+:    :+:   */
+/*   multithreading_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 13:41:20 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 13:42:05 by gapoulai         ###   ########lyon.fr   */
+/*   Created: 2021/02/25 09:16:54 by gapoulai          #+#    #+#             */
+/*   Updated: 2021/02/25 10:32:16 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/bonus.h"
+#ifdef BONUS
+# include "../../includes/minirt.h"
+# include <pthread.h>
 
 void	*render_thread(t_thread_data *thread)
 {
@@ -84,3 +86,5 @@ void	render(t_engine *engine)
 	mlx_do_sync(engine->mlx);
 	engine->need_render = false;
 }
+
+#endif

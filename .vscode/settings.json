@@ -8,9 +8,4 @@
 		"**/*.a": true,
 		"**/*.o": true
 	},
-	"files.associations": {
-		"minirt.h": "c",
-		"bonus.h": "c",
-		"stdbool.h": "c"
-	}
 }
