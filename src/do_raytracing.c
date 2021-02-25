@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/24 14:37:31 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/25 08:07:04 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_rgb	*manage_light(t_thread_data *thread, t_scene *scene, t_hit *hit)
 	data.lights = scene->lights;
 	while (data.lights)
 		process_light(&data, hit, scene);
-	// printf("salut = %f\n", thread->engine->alight.ratio);
 	hit->color = mult_rgb_rgb(add_rgb_rgb(mult_rgb_double(
 					thread->engine->alight.color, thread->engine->alight.ratio),
 				data.diffuse), hit->color);

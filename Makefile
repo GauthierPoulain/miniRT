@@ -23,8 +23,8 @@ _IWHITE=\033[47m
 NAME = miniRT
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
-# CFLAGS = -Wall -Wextra -Werror -O3
+# CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
+CFLAGS = -Wall -Wextra -Werror -g
 MAKE = make --no-print-directory
 RECOMPILE_MLX = 0
 
@@ -120,7 +120,7 @@ norm:
 
 leaks: soft
 ifeq ($(shell uname -s),Linux)
-	valgrind -- ./$(NAME) ./scenes/test.rt --save
+	valgrind --leak-check=full -- ./$(NAME) ./scenes/test.rt --save
 endif
 ifeq ($(shell uname -s),Darwin)
 	leaks --atExit -- ./$(NAME) ./scenes/test.rt --save

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 06:04:43 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 14:39:18 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/02/25 08:39:18 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**ft_read_file(int fd)
 	while (ret)
 	{
 		ret = ft_get_next_line(fd, &line);
-		if (ret == -1)
+		if (ret == -1 || (i == 0 && ret == 0))
 			return (NULL);
 		if (*line)
 			file = add_line(file, line, i++);

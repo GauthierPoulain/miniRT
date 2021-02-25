@@ -25,7 +25,8 @@ _IWHITE=\033[47m
 NAME = libft.a
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
+# CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
+CFLAGS = -Wall -Wextra -Werror -g
 
 MAKE = make --no-print-directory
 
