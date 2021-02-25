@@ -24,9 +24,9 @@ _IWHITE=$'\e[1;47m'
 
 printf "${_BLUE}${_BOLD}miniRT tester${_END}\n"
 
-# printf "remaking project ...\n"
-# make re > /dev/null
-# printf "\n"
+printf "remaking project ...\n"
+make re > /dev/null
+printf "\n"
 
 printf "missing args :\n"
 ./miniRT
