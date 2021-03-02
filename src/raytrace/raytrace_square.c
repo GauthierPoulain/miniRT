@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:11:58 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/27 06:22:08 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/02 13:24:57 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ double	get_proj(t_vector origin, t_vector v1, t_vector v2)
 	a = vectorminus(v1, origin);
 	b = vectorminus(v2, origin);
 	proj = vectormutliply(a, dot(b, a) / pow(magnitude(a), 2));
+	// printf("a = %.20f\n", magnitude(a));
 	return (fabs(distance(get_vector(0, 0, 0), proj)));
 }
 
@@ -29,22 +30,25 @@ bool	check_edges(t_square sq, t_hit hit)
 	t_vector	r0;
 	t_vector	p;
 
-	r0 = vectorcross(sq.normal, get_vector(1, 0, 0));
+	r0 = sq.normal;
+	r0 = vectorcross(r0, apply_rot(sq.normal, sq.normal, get_vector(0, 1, 0)));
 	p = vectoradd(sq.origin, vectormutliply(r0, sq.size));
 	if (get_proj(sq.origin, p, hit.pos) > sq.size)
 		return (false);
-	r0 = vectorcross(r0, get_vector(1, 0, 0));
+	r0 = vectorcross(r0, apply_rot(sq.normal, r0, get_vector(0, 1, 0)));
 	p = vectoradd(sq.origin, vectormutliply(r0, sq.size));
+	// printf("x = %f, y = %f, z = %f\n", p.x, p.y, p.z);
 	if (get_proj(sq.origin, p, hit.pos) > sq.size)
 		return (false);
-	// r0 = vectorcross(get_vector(0, 1, 0), r0);
+	// r0 = vectorcross(get_vector(1, 0, 0), r0);
 	// p = vectoradd(sq.origin, vectormutliply(r0, sq.size));
 	// if (get_proj(sq.origin, p, hit.pos) > sq.size)
 	// 	return (false);
-	// r0 = vectorcross(get_vector(0, 1, 0), r0);
+	// r0 = vectorcross(get_vector(1, 0, 0), r0);
 	// p = vectoradd(sq.origin, vectormutliply(r0, sq.size));
 	// if (get_proj(sq.origin, p, hit.pos) > sq.size)
 	// 	return (false);
+	// printf("salut = %.20f\n", get_proj(sq.origin, p, hit.pos));
 	return (true);
 }
 
