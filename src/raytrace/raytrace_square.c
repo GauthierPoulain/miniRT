@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:11:58 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/02 13:24:57 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/02 14:38:09 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ bool	check_edges(t_square sq, t_hit hit)
 	t_vector	p;
 
 	r0 = sq.normal;
-	r0 = vectorcross(r0, apply_rot(sq.normal, sq.normal, get_vector(0, 1, 0)));
+	r0 = vectorcross(get_vector(0, 1, 0), r0);
+	// printf("x = %.20f, y = %.20f, z = %.20f\n", r0.x, r0.y, r0.z);
 	p = vectoradd(sq.origin, vectormutliply(r0, sq.size));
 	if (get_proj(sq.origin, p, hit.pos) > sq.size)
 		return (false);
-	r0 = vectorcross(r0, apply_rot(sq.normal, r0, get_vector(0, 1, 0)));
+	// r0 = vectorcross(r0, apply_rot(sq.normal, r0, get_vector(0, 1, 0)));
+	r0 = vectorcross(r0, get_vector(0, 1, 0));
 	p = vectoradd(sq.origin, vectormutliply(r0, sq.size));
-	// printf("x = %f, y = %f, z = %f\n", p.x, p.y, p.z);
 	if (get_proj(sq.origin, p, hit.pos) > sq.size)
 		return (false);
 	// r0 = vectorcross(get_vector(1, 0, 0), r0);
