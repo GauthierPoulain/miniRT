@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 11:08:36 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 11:19:01 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # ifdef BONUS
 #  define MULTITHREADING
 #  define NPROCS			8
-#  define CY_CAPS			0
+#  define CY_CAPS			1
 # else
 #  define CY_CAPS			0
 # endif
