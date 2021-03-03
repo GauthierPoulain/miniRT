@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:54 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/25 10:32:16 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 13:27:57 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	*render_scene_multithread(t_engine *engine, long nproc)
 
 void	render(t_engine *engine)
 {
-	render_scene_multithread(engine, sysconf(_SC_NPROCESSORS_ONLN));
+	render_scene_multithread(engine, NPROCS);
 	if (engine->save)
 		return ;
 	mlx_clear_window(engine->mlx, engine->window);

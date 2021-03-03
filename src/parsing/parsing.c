@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 16:12:00 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 13:05:03 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	init_scene_parts(t_engine *engine)
 	engine->scene.planes = NULL;
 	engine->scene.spheres = NULL;
 	engine->scene.squares = NULL;
-	engine->scene.disks = NULL;
 	engine->scene.triangles = NULL;
 	engine->scene.cylinders = NULL;
 }
@@ -66,8 +65,6 @@ void	parse(char *line, t_engine *engine)
 		add_plane(&engine->scene.planes, line + 2);
 	else if (is_id(line, "sq"))
 		add_square(&engine->scene.squares, line + 2);
-	else if (is_id(line, "ds"))
-		add_disk(&engine->scene.disks, line + 2);
 	else if (is_id(line, "tr"))
 		add_triangle(&engine->scene.triangles, line + 2);
 	else if (is_id(line, "cy"))

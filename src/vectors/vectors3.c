@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:00:06 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 13:12:26 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 14:51:14 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vector	vectorcross(t_vector v1, t_vector v2)
 
 double	magnitude(t_vector v)
 {
-	return (sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)));
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
 t_vector	calc_rot(t_vector *c2, t_vector *c3, t_vector rot, t_vector to)

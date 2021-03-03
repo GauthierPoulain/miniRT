@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:11:58 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 12:50:38 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 14:55:27 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	check_edges(t_square sq, t_hit hit)
 	t_vector	up;
 	t_vector	right;
 
-	if (sq.normal.x == 1 && sq.normal.y == 0 && sq.normal.z == 0)
+	if (fabs(sq.normal.x) == 1 && sq.normal.y == 0 && sq.normal.z == 0)
 		up = get_vector(0, 1, 0);
 	else
 		up = get_normalize(vectorcross(get_vector(1, 0, 0), sq.normal));

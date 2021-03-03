@@ -49,7 +49,6 @@ SRCS = \
 	src/parsing/get_objects2.c \
 	src/raytrace/raytrace_sphere.c \
 	src/raytrace/raytrace_plane.c \
-	src/raytrace/raytrace_disk.c \
 	src/raytrace/raytrace_triangle.c \
 	src/raytrace/cylinder2.c \
 	src/raytrace/raytrace_cylinder.c \
@@ -73,7 +72,7 @@ SRCS = \
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-all: ${NAME} $(MANDATORY_OBJS)
+all: ${NAME} $(OBJS)
 
 bonus: CFLAGS += -DBONUS
 bonus: rebonus

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:19:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/24 14:02:25 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 14:37:42 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	add_camera(t_list **lst, char *file)
 		close_minirt("error while parsing the scene");
 	cam->pos = parse_vector(&file);
 	cam->dir = parse_vector(&file);
+	check_normal(cam->dir);
 	cam->fov = ft_atoi(file);
 	cam->id = ++id;
 	if (!vector_limit(cam->dir, -1, 1))
@@ -97,6 +98,7 @@ void	add_plane(t_list **lst, char *file)
 	plane->normal = parse_vector(&file);
 	if (!vector_limit(plane->normal, -1, 1))
 		close_minirt("plane normal is out of range [-1.0, 1.0]");
+	check_normal(plane->normal);
 	plane->normal.x = to_rad(90 * plane->normal.x);
 	plane->normal.y = to_rad(90 * plane->normal.y);
 	plane->normal.z = to_rad(90 * plane->normal.z);

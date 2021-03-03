@@ -8,4 +8,7 @@
 		"**/*.a": true,
 		"**/*.o": true
 	},
+	"files.associations": {
+		"iterator": "c"
+	},
 }

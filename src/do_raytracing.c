@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/25 08:07:04 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 13:04:23 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_hit	closest_object(t_ray ray, t_scene *scene, void **object)
 	hit.color = creatergb(0, 0, 0);
 	raytrace_spheres(ray, scene, &hit, object);
 	raytrace_planes(ray, scene, &hit, object);
-	raytrace_disk(ray, scene, &hit, object);
 	raytrace_triangle(ray, scene, &hit, object);
 	raytrace_cylinder(ray, scene, &hit, object);
 	raytrace_square(ray, scene, &hit, object);

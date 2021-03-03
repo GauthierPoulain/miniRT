@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/02 12:35:10 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 14:40:55 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "../libft/libft.h"
 
 # define DEBUG				1
+# define NPROCS				4
 
 # define WINDOW_NAME	"xX - miniRT by G@PoUl@i_Le_BoSs - Xx"
 
@@ -127,14 +128,6 @@ typedef struct s_triangle
 	t_vector	normal;
 	t_rgb		color;
 }				t_triangle;
-
-typedef struct s_disk
-{
-	t_vector	origin;
-	t_vector	normal;
-	double		size;
-	t_rgb		color;
-}				t_disk;
 
 typedef struct s_cylinder
 {
@@ -264,5 +257,6 @@ double			intersect_caps_cy(t_ray ray, t_cylinder cy, t_vector pos);
 double			calc_c_cy(t_ray ray, t_cylinder cy, t_vector t, t_vector b);
 t_vector		calclanormaleparceqttroplongue(t_cylinder cy, t_vector p);
 double			magnitude(t_vector v);
+void			check_normal(t_vector vec);
 
 #endif
