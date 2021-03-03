@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 13:22:27 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 12:50:55 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 11:26:40 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,11 @@ void	get_save(t_engine *engine, char *filename)
 	int				outfile;
 	int				extrabytes;
 
-	ft_putstr_fd("start render\n", 1);
+	if (DEBUG)
+		printf("start render\n");
 	render(engine);
-	ft_putstr_fd("start save\n", 1);
+	if (DEBUG)
+		printf("start save\n");
 	extrabytes = 4 - ((engine->size_x * 3) % 4);
 	if (extrabytes == 4)
 		extrabytes = 0;

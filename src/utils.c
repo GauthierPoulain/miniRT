@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 08:07:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/24 13:59:29 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 11:26:06 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	close_minirt(char *reason)
 		ft_putchar_fd('\n', STDERR);
 		exit(EXIT_FAILURE);
 	}
-	printf("exit without issues\n");
+	if (DEBUG)
+		printf("exit without issues\n");
 	exit(EXIT_SUCCESS);
 }
 
