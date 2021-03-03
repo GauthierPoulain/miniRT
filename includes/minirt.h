@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 15:41:32 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 11:08:36 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@
 # include "../libft/libft.h"
 
 # define DEBUG				1
-# define NPROCS				4
 
-# define CY_CAPS			0
+# ifdef BONUS
+#  define MULTITHREADING
+#  define NPROCS			8
+#  define CY_CAPS			0
+# else
+#  define CY_CAPS			0
+# endif
 
 # define WINDOW_NAME	"xX - miniRT by G@PoUl@i_Le_BoSs - Xx"
 
@@ -175,6 +180,14 @@ typedef struct s_light_managment
 	double	normal_dot_light;
 }				t_light_managment;
 
+typedef struct s_cyresolve
+{
+	double		tmin;
+	t_vector	t;
+	t_vector	b;
+	t_vector	normal;
+}				t_cyresolve;
+
 int				main(int argc, char const **argv);
 int				is_id(char *str, char *id);
 void			close_minirt(char *reason);
@@ -257,8 +270,9 @@ t_vector		apply_rot(t_vector pos, t_vector dir, t_vector rot);
 t_vector		process_normal_cy(t_ray ray, t_vector normal);
 double			intersect_caps_cy(t_ray ray, t_cylinder cy, t_vector pos);
 double			calc_c_cy(t_ray ray, t_cylinder cy, t_vector t, t_vector b);
-t_vector		calclanormaleparceqttroplongue(t_cylinder cy, t_vector p);
+t_vector		calclanormalparceqttroplongue(t_cylinder cy, t_vector p);
 double			magnitude(t_vector v);
 void			check_normal(t_vector vec);
+void			check_caps(t_ray ray, t_cyresolve *res, t_cylinder cy);
 
 #endif

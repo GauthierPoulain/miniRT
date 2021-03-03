@@ -6,21 +6,22 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 16:11:49 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 11:07:23 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-typedef struct s_resole
+typedef struct s_inf
 {
-	double		tmin;
-	t_vector	t;
-	t_vector	b;
-	t_vector	normal;
-}				t_resolve;
+	double		t;
+	double		a;
+	double		b;
+	double		c;
+	t_vector	p;
+}				t_inf;
 
-void	calc_things(double *a, double *b, t_ray ray, t_resolve *res)
+void	calc_things(double *a, double *b, t_ray ray, t_cyresolve *res)
 {
 	*a = dot(vectorcross(ray.dir, vectorminus(res->t, res->b)),
 			vectorcross(ray.dir, vectorminus(res->t, res->b)));
@@ -29,71 +30,59 @@ void	calc_things(double *a, double *b, t_ray ray, t_resolve *res)
 				vectorminus(res->t, res->b)));
 }
 
-void	infinite_cylinder(t_ray ray, t_cylinder cy, t_resolve *res)
+void	inf_cylinder_part2(t_inf inf, t_ray ray, t_cyresolve *res,
+		t_cylinder cy)
 {
-	double		t;
-	double		a;
-	double		b;
-	double		c;
-	t_vector	p;
-
-	calc_things(&a, &b, ray, res);
-	c = calc_c_cy(ray, cy, res->t, res->b);
-	if (pow(b, 2) - 4 * a * c > EPSILON)
+	inf.t = (-inf.b + sqrt(pow(inf.b, 2) - 4 * inf.a * inf.c))
+		/ (2 * inf.a);
+	inf.p = vectoradd(ray.origin, vectormutliply(ray.dir, inf.t));
+	inf.p = apply_rot(inf.p, cy.dir, get_vector(0, 1, 0));
+	if (inf.t < res->tmin && inf.p.y >= res->b.y && inf.p.y <= res->t.y)
 	{
-		t = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
-		if (t < EPSILON)
-			t = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
-		p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-		p = apply_rot(p, cy.dir, get_vector(0, 1, 0));
-		res->b = apply_rot(res->b, cy.dir, get_vector(0, 1, 0));
-		res->t = apply_rot(res->t, cy.dir, get_vector(0, 1, 0));
-		if (t < res->tmin && p.y >= res->b.y && p.y <= res->t.y)
-		{
-			res->tmin = t;
-			p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-			res->normal = calclanormaleparceqttroplongue(cy, p);
-		}
-		else if (p.y >= res->b.y && p.y <= res->t.y)
-		{
-			res->tmin = t;
-			p = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-			res->normal = calclanormaleparceqttroplongue(cy, p);
-		}
+		res->tmin = inf.t;
+		inf.p = vectoradd(ray.origin, vectormutliply(ray.dir, inf.t));
+		res->normal = calclanormalparceqttroplongue(cy, inf.p);
 	}
 }
 
-void	check_caps(t_ray ray, t_resolve *res, t_cylinder cy)
+void	infinite_cylinder(t_ray ray, t_cylinder cy, t_cyresolve *res)
 {
-	double		t;
-	t_vector	pos;
+	t_inf	inf;
 
-	t = intersect_caps_cy(ray, cy, res->t);
-	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-	if (t > EPSILON && distance(pos, res->t) < cy.radius)
+	calc_things(&inf.a, &inf.b, ray, res);
+	inf.c = calc_c_cy(ray, cy, res->t, res->b);
+	if (pow(inf.b, 2) - 4 * inf.a * inf.c > EPSILON)
 	{
-		res->tmin = t;
-		res->normal = process_normal_cy(ray, cy.dir);
-	}
-	t = intersect_caps_cy(ray, cy, res->b);
-	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
-	if (t > EPSILON && distance(pos, res->b) < cy.radius)
-	{
-		res->tmin = t;
-		res->normal = process_normal_cy(ray, cy.dir);
+		inf.t = (-inf.b - sqrt(pow(inf.b, 2) - 4 * inf.a * inf.c))
+			/ (2 * inf.a);
+		if (inf.t < EPSILON)
+			inf.t = (-inf.b + sqrt(pow(inf.b, 2) - 4 * inf.a * inf.c))
+				/ (2 * inf.a);
+		inf.p = vectoradd(ray.origin, vectormutliply(ray.dir, inf.t));
+		inf.p = apply_rot(inf.p, cy.dir, get_vector(0, 1, 0));
+		res->b = apply_rot(res->b, cy.dir, get_vector(0, 1, 0));
+		res->t = apply_rot(res->t, cy.dir, get_vector(0, 1, 0));
+		if (inf.t < res->tmin && inf.p.y >= res->b.y && inf.p.y <= res->t.y)
+		{
+			res->tmin = inf.t;
+			inf.p = vectoradd(ray.origin, vectormutliply(ray.dir, inf.t));
+			res->normal = calclanormalparceqttroplongue(cy, inf.p);
+		}
+		if (!CY_CAPS)
+			inf_cylinder_part2(inf, ray, res, cy);
 	}
 }
 
 bool	intersect_cylinder(t_ray ray, t_cylinder cy, t_hit *hit)
 {
-	t_resolve	res;
+	t_cyresolve	res;
 
 	if (cy.height < EPSILON || cy.radius < EPSILON)
 		return (false);
 	res.tmin = INFINITY;
 	res.b = vectorminus(cy.pos, vectormutliply(cy.dir, cy.height / 2));
 	res.t = vectoradd(cy.pos, vectormutliply(cy.dir, cy.height / 2));
-	// if (CY_CAPS)
+	if (CY_CAPS)
 		check_caps(ray, &res, cy);
 	infinite_cylinder(ray, cy, &res);
 	if (res.tmin < EPSILON || res.tmin == INFINITY || res.tmin > hit->t)

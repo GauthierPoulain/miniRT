@@ -6,12 +6,12 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:17:07 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/25 10:31:54 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 10:25:51 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BONUS
-# include "../../includes/minirt.h"
+#include "../../includes/minirt.h"
+#ifndef MULTITHREADING
 
 void	*render_thread(t_thread_data *thread)
 {
@@ -29,7 +29,7 @@ void	*render_thread(t_thread_data *thread)
 		}
 	}
 	if (DEBUG)
-		printf("thread %d done\n", thread->id);
+		printf("rendering done\n");
 	return (NULL);
 }
 
@@ -40,7 +40,8 @@ void	*render_scene(t_engine *engine)
 	thread.from = 0;
 	thread.to = engine->size_y - 1;
 	thread.engine = engine;
-	thread.id = -1;
+	if (DEBUG)
+		printf("start rendering\n");
 	render_thread(&thread);
 	return (NULL);
 }

@@ -23,8 +23,8 @@ _IWHITE=\033[47m
 NAME = miniRT
 
 CC = clang
-# CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
+# CFLAGS = -Wall -Wextra -Werror -g
 MAKE = make --no-print-directory
 RECOMPILE_MLX = 0
 
@@ -72,14 +72,16 @@ SRCS = \
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-all: ${NAME} $(OBJS)
+all: ${NAME}
 
 bonus: CFLAGS += -DBONUS
 bonus: rebonus
 bonus: all
 
 rebonus:
-	@$(RM) src/render/*.o
+	@touch 	src/render/monothread.c \
+			src/render/multithreading_bonus.c \
+			src/raytrace/raytrace_cylinder.c \
 
 mlx:
 ifeq ($(shell uname -s),Darwin)
@@ -109,8 +111,6 @@ endif
 	@$(RM) $(NAME)
 	@${RM} *.out
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_RED)$(_BOLD)-$(_END) ][ removing ] $(_BLUE)$(_BOLD).out files $(_END)\n"
-	@${RM} *.bmp
-	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_RED)$(_BOLD)-$(_END) ][ removing ] $(_BLUE)$(_BOLD).bmp files $(_END)\n"
 
 re: fclean
 	@$(MAKE) all
@@ -138,6 +138,5 @@ test: soft
 
 save: soft
 	./$(NAME) ./scenes/test.rt --save
-	# open ./save.bmp
 
 .PHONY: all mlx clean fclean re soft norm leaks test save

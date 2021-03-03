@@ -6,12 +6,12 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:54 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 15:08:01 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 10:22:27 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef BONUS
-# include "../../includes/minirt.h"
+#include "../../includes/minirt.h"
+#ifdef MULTITHREADING
 # include <pthread.h>
 
 void	*render_thread(t_thread_data *thread)

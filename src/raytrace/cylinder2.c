@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:49:01 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 15:48:54 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 10:32:21 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,29 @@ double	calc_c_cy(t_ray ray, t_cylinder cy, t_vector t, t_vector b)
 					vectorminus(t, b))));
 }
 
-t_vector	calclanormaleparceqttroplongue(t_cylinder cy, t_vector p)
+t_vector	calclanormalparceqttroplongue(t_cylinder cy, t_vector p)
 {
 	return (vectorminus(vectoradd(cy.pos, vectormutliply(get_normalize(cy.dir),
 					dot(vectorminus(p, cy.pos), get_normalize(cy.dir)))), p));
+}
+
+void	check_caps(t_ray ray, t_cyresolve *res, t_cylinder cy)
+{
+	double		t;
+	t_vector	pos;
+
+	t = intersect_caps_cy(ray, cy, res->t);
+	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
+	if (t > EPSILON && distance(pos, res->t) < cy.radius)
+	{
+		res->tmin = t;
+		res->normal = process_normal_cy(ray, cy.dir);
+	}
+	t = intersect_caps_cy(ray, cy, res->b);
+	pos = vectoradd(ray.origin, vectormutliply(ray.dir, t));
+	if (t > EPSILON && t < res->tmin && distance(pos, res->b) < cy.radius)
+	{
+		res->tmin = t;
+		res->normal = process_normal_cy(ray, cy.dir);
+	}
 }
