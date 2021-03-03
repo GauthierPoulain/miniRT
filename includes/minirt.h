@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 14:40:55 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 15:41:32 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define DEBUG				1
 # define NPROCS				4
+
+# define CY_CAPS			0
 
 # define WINDOW_NAME	"xX - miniRT by G@PoUl@i_Le_BoSs - Xx"
 

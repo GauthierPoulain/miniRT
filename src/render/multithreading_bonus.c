@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:54 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 13:27:57 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 15:08:01 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	*render_scene_multithread(t_engine *engine, long nproc)
 	thread = malloc(nproc * sizeof(t_thread_data));
 	if (!tid || !thread)
 		close_minirt("error while processing engine threads");
-	id = 0;
+	id = -1;
 	to = -1;
-	while (id < nproc)
+	while (++id < nproc)
 	{
 		thread[id].from = to + 1;
 		to = ft_min(engine->size_y - 1, thread[id].from
@@ -69,8 +69,8 @@ void	*render_scene_multithread(t_engine *engine, long nproc)
 		thread[id].id = id;
 		if (DEBUG)
 			printf("thread id = %d (%d -> %d)\n", id, thread[id].from, to);
-		if (!pthread_create(&tid[id], NULL, (void *)render_thread, &thread[id]))
-			id++;
+		if (pthread_create(&tid[id], NULL, (void *)render_thread, &thread[id]))
+			close_minirt("unable to create thread");
 	}
 	return (wait_thread_end(tid, nproc, thread));
 }

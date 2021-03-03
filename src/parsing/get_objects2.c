@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:16:26 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 15:01:06 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 15:38:59 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	add_cylinder(t_list **lst, char *file)
 		close_minirt("error while parsing the scene");
 	cy->pos = parse_vector(&file);
 	cy->dir = parse_vector(&file);
+	check_normal(cy->dir);
 	if (!vector_limit(cy->dir, -1, 1))
 		close_minirt("cylinder orientation is out of range [-1.0, 1.0]");
 	set_normalize(&cy->dir);
