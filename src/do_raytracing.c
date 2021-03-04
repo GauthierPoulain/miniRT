@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 15:43:14 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/04 02:02:38 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	process_light(t_light_managment *data, t_hit *hit, t_scene *scene)
 	if (distance(hit->pos, data->light->pos) < data->hit_obstacle.t)
 	{
 		data->normal_dot_light = ft_dmax(dot(hit->normal,
-					data->to_light.dir), 0) * (LIGHT_MULT * data->light->brightness)
+					data->to_light.dir), 0) * (LIGHT_MULT
+				* data->light->brightness)
 			/ distance(hit->pos, data->light->pos);
 		data->color_l = mult_rgb_double(add_rgb_rgb(mult_rgb_double(
 						data->light->color,
