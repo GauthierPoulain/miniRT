@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 11:25:36 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 11:57:33 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,5 +274,6 @@ t_vector		calclanormalparceqttroplongue(t_cylinder cy, t_vector p);
 double			magnitude(t_vector v);
 void			check_normal(t_vector vec);
 void			check_caps(t_ray ray, t_cyresolve *res, t_cylinder cy);
+double			to_deg(double angle);
 
 #endif

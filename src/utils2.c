@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:23:47 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/22 12:28:58 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 10:35:01 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,9 @@ double	ft_min_double(double a, double b)
 	if (a < b)
 		return (a);
 	return (b);
+}
+
+double	to_deg(double angle)
+{
+	return (angle * 180 / PI);
 }
