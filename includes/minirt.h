@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/08 10:34:33 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 13:38:33 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,5 +275,8 @@ double			magnitude(t_vector v);
 void			check_normal(t_vector vec);
 void			check_caps(t_ray ray, t_cyresolve *res, t_cylinder cy);
 double			to_deg(double angle);
+
+void			check_line(char *line);
+bool			check_resolution(char *str);
 
 #endif

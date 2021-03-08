@@ -67,6 +67,7 @@ SRCS = \
 	src/save.c \
 	src/render/monothread.c \
 	src/render/multithreading_bonus.c \
+	src/parsing/check_parsing.c \
 
 %.o: %.c $(HEADER)
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"

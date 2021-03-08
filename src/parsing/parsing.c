@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/08 11:01:24 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 13:38:48 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	parse_scene(char **file, t_engine *engine)
 	i = -1;
 	while (file[++i])
 	{
+		check_line(file[i]);
 		parse(file[i], engine);
 	}
 }
