@@ -1,0 +1,112 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_parsing_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/08 13:56:53 by gapoulai          #+#    #+#             */
+/*   Updated: 2021/03/08 14:36:48 by gapoulai         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minirt.h"
+
+int		need_space(char **line)
+{
+	int		i;
+	char	*str;
+
+	str = *line;
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	*line += i;
+	return (i);
+}
+
+int		need_int(char **line)
+{
+	int		i;
+	char	*str;
+
+	str = *line;
+	i = 0;
+	while (ft_isdigit(str[i]))
+		i++;
+	*line += i;
+	return (i);
+}
+
+int		need_eol(char **line)
+{
+	int		i;
+	char	*str;
+
+	str = *line;
+	i = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (str[i])
+		return (0);
+	else
+		i++;
+	*line += i;
+	return (i);
+}
+
+int		need_double(char **line)
+{
+	int		i;
+	char	*str;
+	int		tmp;
+
+	str = *line;
+	i = 0;
+	tmp = need_int(&str);
+	if (!tmp)
+		return (0);
+	i += tmp;
+	if (str[i] != '.')
+	{
+		*line += i;
+		return (i);
+	}
+	i++;
+	tmp = need_int(&str);
+	if (!tmp)
+		return (0);
+	i += tmp;
+	*line += i;
+	return (i);
+}
+
+int		need_rgb(char **line)
+{
+	int		i;
+	char	*str;
+	int		tmp;
+
+	str = *line;
+	i = 0;
+	tmp = need_int(&str);
+	if (!tmp)
+		return (0);
+	i += tmp + 1;
+	if (*str != ',')
+		return (0);
+	tmp = need_int(&str);
+	if (!tmp)
+		return (0);
+	i += tmp + 1;
+	if (*str != ',')
+		return (0);
+	tmp = need_int(&str);
+	if (!tmp)
+		return (0);
+	i += tmp + 1;
+	if (*str != ',')
+		return (0);
+	*line += i;
+	return (i);	
+}

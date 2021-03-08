@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/08 13:38:33 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 13:59:06 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,5 +278,11 @@ double			to_deg(double angle);
 
 void			check_line(char *line);
 bool			check_resolution(char *str);
+
+int				need_space(char **line);
+int				need_int(char **line);
+int				need_eol(char **line);
+int				need_double(char **line);
+int				need_rgb(char **line);
 
 #endif
