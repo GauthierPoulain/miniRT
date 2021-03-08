@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 13:05:03 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 11:01:24 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,10 @@ void	get_file(t_engine *engine, const char *path)
 {
 	int		fd;
 
-	if (open((char *)path, O_DIRECTORY) != -1)
+	fd = open((char *)path, O_DIRECTORY);
+	if (fd != -1)
 		close_minirt("scene must be a file");
+	close(fd);
 	fd = open((char *)path, O_RDONLY);
 	if (fd == -1)
 		close_minirt("file not found");

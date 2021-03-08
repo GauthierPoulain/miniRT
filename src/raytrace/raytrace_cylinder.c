@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:05:39 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/03 11:07:23 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 11:17:45 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	calc_things(double *a, double *b, t_ray ray, t_cyresolve *res)
 				vectorminus(res->t, res->b)));
 }
 
-void	inf_cylinder_part2(t_inf inf, t_ray ray, t_cyresolve *res,
-		t_cylinder cy)
+void	inf_cylinder_part2(t_inf inf, t_ray ray, t_cyresolve *res, t_cylinder
+			cy)
 {
 	inf.t = (-inf.b + sqrt(pow(inf.b, 2) - 4 * inf.a * inf.c))
 		/ (2 * inf.a);
