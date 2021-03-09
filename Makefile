@@ -78,12 +78,12 @@ all: ${NAME}
 
 bonus: CFLAGS += -DBONUS
 bonus: rebonus
-bonus: all
 
 rebonus:
-	@touch 	src/render/monothread.c \
-			src/render/multithreading_bonus.c \
-			src/raytrace/raytrace_cylinder.c \
+	@${RM} 	src/render/monothread.o \
+			src/render/multithreading_bonus.o \
+			src/raytrace/raytrace_cylinder.o
+rebonus: all
 
 mlx:
 ifeq ($(shell uname -s),Darwin)
