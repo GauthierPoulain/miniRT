@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:37:26 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/09 13:53:56 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 14:14:24 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,4 @@ bool	check_triangle(char *str)
 	if (!need_eol(&str))
 		return (false);
 	return (true);
-
 }
