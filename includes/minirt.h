@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/09 13:54:02 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 14:26:41 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define DEBUG				0
+# define DEBUG				1
 
 # ifdef BONUS
 #  define MULTITHREADING
-#  define NPROCS			8
+#  define NPROCS			4
 #  define CY_CAPS			1
 # else
 #  define CY_CAPS			0
@@ -275,17 +275,14 @@ double			magnitude(t_vector v);
 void			check_normal(t_vector vec);
 void			check_caps(t_ray ray, t_cyresolve *res, t_cylinder cy);
 double			to_deg(double angle);
-
 void			check_line(char *line);
 bool			check_resolution(char *str);
-
 int				need_space(char **line);
 int				need_int(char **line);
 int				need_eol(char **line);
 int				need_double(char **line);
 int				need_rgb(char **line);
 int				need_3dvector(char **line);
-
 bool			check_sphere(char *str);
 bool			check_plane(char *str);
 bool			check_square(char *str);

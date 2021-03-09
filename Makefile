@@ -24,6 +24,7 @@ NAME = miniRT
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
+# CFLAGS = -Wall -Wextra -Werror -g
 # CFLAGS = -Wall -Wextra -Werror -pg
 MAKE = make --no-print-directory
 RECOMPILE_MLX = 0
