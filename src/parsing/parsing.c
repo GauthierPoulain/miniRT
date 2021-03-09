@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/08 13:38:48 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 13:02:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	parse(char *line, t_engine *engine)
 		;
 	else
 		close_minirt(ft_strjoin("invalid item in scene on line : '",
-		ft_strjoin(line, "'")));
+				ft_strjoin(line, "'")));
 }
 
 void	parse_scene(char **file, t_engine *engine)
@@ -88,6 +88,7 @@ void	parse_scene(char **file, t_engine *engine)
 		check_line(file[i]);
 		parse(file[i], engine);
 	}
+	close_minirt("done ^^");
 }
 
 void	get_file(t_engine *engine, const char *path)

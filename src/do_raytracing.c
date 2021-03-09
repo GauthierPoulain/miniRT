@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:28:33 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/04 02:02:38 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 13:11:49 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	do_raytracing(t_thread_data *thread, int x, int y)
 			hit.normal = vectormutliply(hit.normal, -1);
 		manage_light(thread, &thread->engine->scene, &hit);
 		set_pixel_color(thread->engine, x, y, ft_rgbtohex(
-			hit.color.r, hit.color.g, hit.color.b));
+				hit.color.r, hit.color.g, hit.color.b));
 	}
 }

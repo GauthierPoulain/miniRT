@@ -6,13 +6,13 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 13:56:53 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/08 14:36:48 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 13:16:50 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-int		need_space(char **line)
+int	need_space(char **line)
 {
 	int		i;
 	char	*str;
@@ -25,20 +25,22 @@ int		need_space(char **line)
 	return (i);
 }
 
-int		need_int(char **line)
+int	need_int(char **line)
 {
 	int		i;
 	char	*str;
 
 	str = *line;
 	i = 0;
+	if (*str == '-')
+		i++;
 	while (ft_isdigit(str[i]))
 		i++;
 	*line += i;
 	return (i);
 }
 
-int		need_eol(char **line)
+int	need_eol(char **line)
 {
 	int		i;
 	char	*str;
@@ -55,7 +57,7 @@ int		need_eol(char **line)
 	return (i);
 }
 
-int		need_double(char **line)
+int	need_double(char **line)
 {
 	int		i;
 	char	*str;
@@ -64,15 +66,16 @@ int		need_double(char **line)
 	str = *line;
 	i = 0;
 	tmp = need_int(&str);
-	if (!tmp)
-		return (0);
 	i += tmp;
-	if (str[i] != '.')
+	if (*str != '.')
 	{
 		*line += i;
 		return (i);
 	}
 	i++;
+	str++;
+	if (*str == '-')
+		return (0);
 	tmp = need_int(&str);
 	if (!tmp)
 		return (0);
@@ -81,7 +84,7 @@ int		need_double(char **line)
 	return (i);
 }
 
-int		need_rgb(char **line)
+int	need_rgb(char **line)
 {
 	int		i;
 	char	*str;
@@ -92,21 +95,19 @@ int		need_rgb(char **line)
 	tmp = need_int(&str);
 	if (!tmp)
 		return (0);
-	i += tmp + 1;
-	if (*str != ',')
+	if (*str++ != ',')
 		return (0);
+	i += tmp + 1;
 	tmp = need_int(&str);
 	if (!tmp)
 		return (0);
-	i += tmp + 1;
-	if (*str != ',')
+	if (*str++ != ',')
 		return (0);
+	i += tmp + 1;
 	tmp = need_int(&str);
 	if (!tmp)
 		return (0);
-	i += tmp + 1;
-	if (*str != ',')
-		return (0);
+	i += tmp;
 	*line += i;
-	return (i);	
+	return (i);
 }
