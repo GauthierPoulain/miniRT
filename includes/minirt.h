@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/09 13:29:36 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 13:54:02 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,5 +285,11 @@ int				need_eol(char **line);
 int				need_double(char **line);
 int				need_rgb(char **line);
 int				need_3dvector(char **line);
+
+bool			check_sphere(char *str);
+bool			check_plane(char *str);
+bool			check_square(char *str);
+bool			check_cylinder(char *str);
+bool			check_triangle(char *str);
 
 #endif

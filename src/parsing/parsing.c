@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:22:49 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/09 13:02:05 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 13:54:33 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	parse_scene(char **file, t_engine *engine)
 		check_line(file[i]);
 		parse(file[i], engine);
 	}
-	close_minirt("done ^^");
 }
 
 void	get_file(t_engine *engine, const char *path)

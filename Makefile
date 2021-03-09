@@ -68,6 +68,7 @@ SRCS = \
 	src/render/monothread.c \
 	src/render/multithreading_bonus.c \
 	src/parsing/check_parsing.c \
+	src/parsing/check_parsing2.c \
 	src/parsing/check_parsing_utils.c \
 	src/parsing/check_parsing_utils2.c \
 
