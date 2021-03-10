@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:02:09 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/10 13:27:42 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/10 14:33:12 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vector	set_ray_direction(t_engine *engine, t_cam cam, int x, int y)
 		* tan((cam.fov / 2) *(PI / 180));
 	pixel.y = (1 - (2 * ((y + .5) / size_y))) * tan((cam.fov / 2) *(PI / 180));
 	pixel.z = 1;
-	if (!(cam.dir.x == 0 && cam.dir.y > 0 && cam.dir.z == 0))
+	if (!(cam.dir.x == 0 && cam.dir.y != 0 && cam.dir.z == 0))
 		pixel = apply_rot(pixel, cam.dir, axis);
 	return (pixel);
 }
