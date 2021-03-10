@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:02:09 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/08 11:17:04 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/10 13:27:42 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ t_ray	new_ray(t_vector origin, t_vector dir)
 
 t_ray	init_ray(t_engine *engine, t_cam cam, int x, int y)
 {
-	t_vector	dir;
-
-	dir = set_ray_direction(engine, cam, x, y);
-	return (new_ray(cam.pos, dir));
+	return (new_ray(cam.pos, set_ray_direction(engine, cam, x, y)));
 }
 
 t_vector	set_ray_direction(t_engine *engine, t_cam cam, int x, int y)

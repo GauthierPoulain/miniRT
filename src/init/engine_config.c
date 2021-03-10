@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:06:05 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/24 13:46:31 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/10 10:08:05 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	get_win_size(t_engine *engine, int save)
 		engine->size_x = ft_min(tmpx, engine->size_x);
 		engine->size_y = ft_min(tmpy, engine->size_y);
 	}
-	if (engine->size_x <= 0 || engine->size_x > 16384
-		|| engine->size_y <= 0 || engine->size_y > 16384)
+	if (tmpx <= 0 || tmpx > 16384
+		|| tmpy <= 0 || tmpy > 16384)
 		close_minirt("invalid fame size, must be between 0 and 16384");
 }
 

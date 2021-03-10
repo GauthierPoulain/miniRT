@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/09 14:26:41 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/10 12:28:45 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define DEBUG				1
+# define DEBUG				0
 
 # ifdef BONUS
 #  define MULTITHREADING
@@ -31,7 +31,7 @@
 #  define CY_CAPS			0
 # endif
 
-# define WINDOW_NAME	"xX - miniRT by G@PoUl@i_Le_BoSs - Xx"
+# define WINDOW_NAME	"miniRT"
 
 # define PI 				3.1415
 # define EPSILON			1e-4
