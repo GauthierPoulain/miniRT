@@ -23,6 +23,7 @@ _IWHITE=\033[47m
 NAME = miniRT
 
 CC = clang
+# CFLAGS = -Wall -Wextra -Werror -O3
 CFLAGS = -Wall -Wextra -Werror -fno-builtin -O3
 # CFLAGS = -Wall -Wextra -Werror -g
 # CFLAGS = -Wall -Wextra -Werror -pg
@@ -59,7 +60,6 @@ SRCS = \
 	src/minirt.c \
 	src/utils.c \
 	src/utils2.c \
-	src/rays.c \
 	src/colors.c \
 	src/colors2.c \
 	src/camera.c \
@@ -72,6 +72,7 @@ SRCS = \
 	src/parsing/check_parsing2.c \
 	src/parsing/check_parsing_utils.c \
 	src/parsing/check_parsing_utils2.c \
+	src/camera/cam1.c \
 
 %.o: %.c $(HEADER)
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"

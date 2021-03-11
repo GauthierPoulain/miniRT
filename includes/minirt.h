@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/10 12:28:45 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 12:22:02 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,14 @@ typedef struct s_cyresolve
 	t_vector	b;
 	t_vector	normal;
 }				t_cyresolve;
+
+typedef struct	s_base
+{
+	t_vector	i;
+	t_vector	j;
+	t_vector	k;
+}				t_base;
+
 
 int				main(int argc, char const **argv);
 int				is_id(char *str, char *id);

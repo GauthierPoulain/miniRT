@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 09:19:28 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/05 12:00:09 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 13:22:13 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	add_camera(t_list **lst, char *file)
 		close_minirt("error while parsing the scene");
 	cam->pos = parse_vector(&file);
 	cam->dir = parse_vector(&file);
-	check_normal(cam->dir);
 	cam->fov = ft_atoi(file);
 	cam->id = ++id;
 	if (!vector_limit(cam->dir, -1, 1))
-		close_minirt("camera rotation is out of range [-1, 1]");
+		close_minirt("camera rotation is out of range [-1, 1`]");
 	if (!ft_isinrange(cam->fov, 0, 180))
 		close_minirt("camera fov is out of range [0, 180]");
+	cam->dir = vectorcross(cam->dir, get_vector(1, 0, 0));
 	new = ft_lstnew(cam);
 	if (!new)
 		close_minirt("error while parsing the scene");
