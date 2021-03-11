@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:00:06 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/11 10:26:45 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 13:24:40 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_vector	apply_rot(t_vector pos, t_vector dir, t_vector rot)
 	if (dir.x == 0 && dir.y < 0 && dir.z == 0)
 		pos = get_vector(pos.x, pos.y, -pos.z);
 	if (!(dir.x == 0 && dir.y != 0 && dir.z == 0))
-		pos = get_vector(dot(calc_rot(&c2, &c3, rot, dir), pos), dot(c2, pos), dot(c3, pos));
+		pos = get_vector(dot(calc_rot(&c2, &c3, rot, dir), pos),
+				dot(c2, pos), dot(c3, pos));
 	return (pos);
 }

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/11 12:22:02 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 13:26:50 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,14 +188,6 @@ typedef struct s_cyresolve
 	t_vector	normal;
 }				t_cyresolve;
 
-typedef struct	s_base
-{
-	t_vector	i;
-	t_vector	j;
-	t_vector	k;
-}				t_base;
-
-
 int				main(int argc, char const **argv);
 int				is_id(char *str, char *id);
 void			close_minirt(char *reason);
@@ -296,5 +288,9 @@ bool			check_plane(char *str);
 bool			check_square(char *str);
 bool			check_cylinder(char *str);
 bool			check_triangle(char *str);
+t_vector		vec3_rotatex(t_vector vec3, double alpha);
+t_vector		vec3_rotatey(t_vector vec3, double beta);
+t_vector		vec3_rotatez(t_vector vec3, double gamma);
+t_vector		vec3_rotatexyz(t_vector vec3, t_vector ovec3);
 
 #endif

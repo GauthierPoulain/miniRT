@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:49:01 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/09 13:01:50 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 13:24:17 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	calc_c_cy(t_ray ray, t_cylinder cy, t_vector t, t_vector b)
 
 	a = vectorcross(vectorminus(ray.origin, b), vectorminus(t, b));
 	return (dot(a, a) - (cy.radius * cy.radius * dot(vectorminus(t, b),
-				vectorminus(t, b))));
+					vectorminus(t, b))));
 }
 
 t_vector	calclanormalparceqttroplongue(t_cylinder cy, t_vector p)
