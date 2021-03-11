@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/11 13:26:50 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 14:21:12 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define WINDOW_NAME	"miniRT"
 
-# define PI 				3.1415
+# define PI 				3.14159265359
 # define EPSILON			1e-4
 # define ALBEDO				.4
 # define LIGHT_MULT			10

@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:26:05 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/11 13:28:23 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 14:20:59 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ t_vector	vec3_rotatez(t_vector vec3, double gamma)
 
 t_vector	vec3_rotatexyz(t_vector vec3, t_vector ovec3)
 {
-	t_vector	rvec3;
 	t_vector	tmp_x;
 	t_vector	tmp_y;
 
 	tmp_x = vec3_rotatex(vec3, ovec3.x);
 	tmp_y = vec3_rotatey(tmp_x, ovec3.y);
-	rvec3 = vec3_rotatez(tmp_y, ovec3.z);
-	return (rvec3);
+	return (vec3_rotatez(tmp_y, ovec3.z));
 }
