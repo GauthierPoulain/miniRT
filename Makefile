@@ -73,6 +73,7 @@ SRCS = \
 	src/parsing/check_parsing_utils.c \
 	src/parsing/check_parsing_utils2.c \
 	src/camera/cam1.c \
+	src/camera/cam2.c \
 
 %.o: %.c $(HEADER)
 	@printf "[ ${_PURPLE}${_BOLD}${NAME}${_END} ] > [ $(_GREEN)$(_BOLD)+$(_END) ][ compiling ] $(_BLUE)$(_BOLD)$<$(_END)\n"
