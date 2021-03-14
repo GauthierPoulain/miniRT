@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 15:05:06 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 13:40:18 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/14 08:01:25 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	if (!ft_calloc(len + 1, sizeof(char), (void **)&res))
+	if (!ft_calloc(len + 1, sizeof(char), (void **)& res))
 		return (NULL);
 	if (s1)
 		ft_memcpy(res, s1, ft_strlen(s1));
@@ -37,7 +37,7 @@ char	*ft_strjoinf1(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	if (!ft_calloc(len + 1, sizeof(char), (void **)&res))
+	if (!ft_calloc(len + 1, sizeof(char), (void **)& res))
 		return (NULL);
 	if (s1)
 		ft_memcpy(res, s1, ft_strlen(s1));
@@ -55,7 +55,7 @@ char	*ft_strjoinf2(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	if (!ft_calloc(len + 1, sizeof(char), (void **)&res))
+	if (!ft_calloc(len + 1, sizeof(char), (void **)& res))
 		return (NULL);
 	if (s1)
 		ft_memcpy(res, s1, ft_strlen(s1));
@@ -73,7 +73,7 @@ char	*ft_strjoinall(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	if (!ft_calloc(len + 1, sizeof(char), (void **)&res))
+	if (!ft_calloc(len + 1, sizeof(char), (void **)& res))
 		return (NULL);
 	if (s1)
 		ft_memcpy(res, s1, ft_strlen(s1));
@@ -93,14 +93,14 @@ char	*ft_strjoinc(char *s1, char c)
 	i = 0;
 	if (!s1)
 	{
-		if (!ft_malloc(2, sizeof(char), (void **)&res))
+		if (!ft_malloc(2, sizeof(char), (void **)& res))
 			return (NULL);
 		res[0] = c;
 		res[1] = 0;
 		return (res);
 	}
 	tlen = ft_strlen(s1) + 1;
-	if (!ft_malloc(tlen + 1, sizeof(char), (void **)&res))
+	if (!ft_malloc(tlen + 1, sizeof(char), (void **)& res))
 		return (NULL);
 	while (s1[i])
 	{

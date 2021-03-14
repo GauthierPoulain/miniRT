@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 07:15:23 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 13:38:58 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/14 08:00:24 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_ctos(char c)
 {
 	char	*res;
 
-	if (!ft_malloc(2, sizeof(char), (void **)&res))
+	if (!ft_malloc(2, sizeof(char), (void **)& res))
 		return (NULL);
 	res[0] = c;
 	res[1] = 0;

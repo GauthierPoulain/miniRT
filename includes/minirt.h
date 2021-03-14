@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 07:53:30 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/11 14:21:12 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/14 08:05:34 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define DEBUG				0
+# define DEBUG				1
 
 # ifdef BONUS
 #  define MULTITHREADING
-#  define NPROCS			4
+#  define NPROCS			8
 #  define CY_CAPS			1
 # else
 #  define CY_CAPS			0
@@ -38,8 +38,13 @@
 # define ALBEDO				.4
 # define LIGHT_MULT			10
 
-# define KEY_EXIT			53
-# define KEY_CHANGECAM		8
+# ifdef __APPLE__
+#  define KEY_EXIT			53
+#  define KEY_CHANGECAM		8
+# else
+#  define KEY_EXIT			65307
+#  define KEY_CHANGECAM		99
+# endif
 
 typedef struct s_vector
 {
@@ -242,30 +247,30 @@ t_ray			init_ray(t_engine *engine, t_cam cam, int x, int y);
 t_vector		set_ray_direction(t_engine *engine, t_cam cam, int x, int y);
 void			do_raytracing(t_thread_data *thread, int x, int y);
 bool			secdegsolve(t_vector point, double *t1, double *t2);
-void			raytrace_spheres(t_ray ray, t_scene *scene, t_hit *hit, void
-					**obj);
+void			raytrace_spheres(t_ray ray, t_scene *scene, t_hit *hit, \
+					void **obj);
 double			ft_max_double(double a, double b);
 double			ft_min_double(double a, double b);
-bool			intersect_plane(const t_ray ray, const t_plane plane, t_hit
-					*hit);
-void			raytrace_planes(t_ray ray, t_scene *scene, t_hit *hit, void
-					**obj);
+bool			intersect_plane(const t_ray ray, const t_plane plane, \
+					t_hit *hit);
+void			raytrace_planes(t_ray ray, t_scene *scene, t_hit *hit, \
+					void **obj);
 t_vector		normaltodeg(t_vector vec);
 void			add_disk(t_list **lst, char *file);
 void			add_square(t_list **lst, char *file);
-void			raytrace_square(t_ray ray, t_scene *scene, t_hit *hit, void
-					**obj);
-void			raytrace_disk(t_ray ray, t_scene *scene, t_hit *hit, void
-					**obj);
+void			raytrace_square(t_ray ray, t_scene *scene, t_hit *hit, \
+					void **obj);
+void			raytrace_disk(t_ray ray, t_scene *scene, t_hit *hit, \
+					void **obj);
 t_rgb			moy_rgb_rgb(t_rgb rgb1, t_rgb rgb2);
 t_vector		vectorcross(t_vector v1, t_vector v2);
-void			raytrace_triangle(t_ray ray, t_scene *scene, t_hit *hit, void
-					**obj);
+void			raytrace_triangle(t_ray ray, t_scene *scene, t_hit *hit, \
+					void **obj);
 t_vector		get_triangle_normal(t_triangle *triangle);
 void			add_triangle(t_list **lst, char *file);
 void			add_cylinder(t_list **lst, char *file);
-void			raytrace_cylinder(t_ray ray, t_scene *scene, t_hit *hit, void
-					**obj);
+void			raytrace_cylinder(t_ray ray, t_scene *scene, t_hit *hit, \
+					void **obj);
 t_vector		apply_rot(t_vector pos, t_vector dir, t_vector rot);
 t_vector		process_normal_cy(t_ray ray, t_vector normal);
 double			intersect_caps_cy(t_ray ray, t_cylinder cy, t_vector pos);

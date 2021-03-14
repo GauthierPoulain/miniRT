@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 09:09:24 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/02/08 13:38:48 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/14 08:00:54 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_itoa(int n)
 	count = ft_nblen(n);
 	if (tmp < 0 || count == 0)
 		count++;
-	if (!ft_calloc(count + 1, sizeof(char), (void **)&res))
+	if (!ft_calloc(count + 1, sizeof(char), (void **)& res))
 		return (NULL);
 	i = 0;
 	if (tmp < 0)

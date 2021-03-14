@@ -41,7 +41,6 @@ void	add_camera(t_list **lst, char *file)
 		close_minirt("camera rotation is out of range [-1, 1`]");
 	if (!ft_isinrange(cam->fov, 0, 180))
 		close_minirt("camera fov is out of range [0, 180]");
-	cam->dir = vectorcross(cam->dir, get_vector(1, 0, 0));
 	new = ft_lstnew(cam);
 	if (!new)
 		close_minirt("error while parsing the scene");
