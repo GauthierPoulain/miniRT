@@ -147,4 +147,3 @@ save: soft
 	./$(NAME) ./scenes/test.rt --save
 
 .PHONY: all bonus rebonus mlx clean fclean re soft norm leaks test save
-.NOTPARALLEL: rebonus

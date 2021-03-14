@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 12:29:58 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/11 10:17:51 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/14 08:17:46 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	loop_event(t_engine *engine)
 
 void	engine_event(t_engine *engine)
 {
-	mlx_do_key_autorepeaton(engine->mlx);
 	mlx_key_hook(engine->window, *key_event, engine);
 	mlx_hook(engine->window, 17, 0, *close_event, NULL);
 	mlx_loop_hook(engine->mlx, *loop_event, engine);
