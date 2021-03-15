@@ -6,7 +6,7 @@
 /*   By: gapoulai <gapoulai@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 13:22:27 by gapoulai          #+#    #+#             */
-/*   Updated: 2021/03/14 08:00:01 by gapoulai         ###   ########lyon.fr   */
+/*   Updated: 2021/03/15 12:46:41 by gapoulai         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_header(unsigned int *headers, t_engine *engine, int eb)
 	int	paddedsize;
 
 	paddedsize = engine->size_y;
-	paddedsize = ((engine->size_x * 3) + eb) * paddedsize;
+	paddedsize = ((engine->size_x * 3) + eb) *paddedsize;
 	headers[0] = paddedsize + 54;
 	headers[1] = 0;
 	headers[2] = 54;
@@ -78,7 +78,7 @@ void	imgcpy(int fd, int extrabites, t_engine *engine)
 	y = 0;
 	while (y < engine->size_y)
 	{
-		ft_calloc((3 * engine->size_x) + extrabites, sizeof(char), \
+		ft_calloc((3 * engine->size_x) + extrabites, sizeof(char),
 			(void **)& buffer);
 		blen = 0;
 		x = 0;
